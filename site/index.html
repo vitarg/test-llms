@@ -15,13 +15,13 @@
             <h1>Three LLM results</h1>
           </div>
           <nav class="model-switcher" aria-label="Choose model result">
-            <button class="switch-button is-active" type="button" data-model="claude">
+            <button class="switch-button is-active" type="button" data-model="qwen27b">
+              Qwen 27B
+            </button>
+            <button class="switch-button" type="button" data-model="claude">
               Claude
             </button>
             <button class="switch-button" type="button" data-model="gpt">GPT</button>
-            <button class="switch-button" type="button" data-model="qwen27b">
-              Qwen 27B
-            </button>
           </nav>
         </header>
 
@@ -29,20 +29,34 @@
           <article class="preview-panel" aria-labelledby="active-title">
             <div class="preview-header">
               <div>
-                <p class="eyebrow" id="active-model">Claude</p>
-                <h2 id="active-title">Expense tracker by Claude</h2>
+                <p class="eyebrow" id="active-model">Qwen 27B</p>
+                <h2 id="active-title">Expense tracker by Qwen 27B</h2>
               </div>
-              <a class="open-link" id="open-result" href="./apps/claude/" target="_blank" rel="noreferrer">
+              <a class="open-link" id="open-result" href="./apps/qwen27b/" target="_blank" rel="noreferrer">
                 Open
               </a>
             </div>
             <p class="model-note" id="active-note">
-              Compact implementation with strongly separated hooks, utilities, types, and presentational components.
+              Straightforward Vite implementation with category filtering, persisted expenses, and a visual header asset.
             </p>
+            <dl class="model-meta" aria-label="Run details">
+              <div>
+                <dt>Model</dt>
+                <dd id="active-model-name">Qwen3.6-27B-UD-Q8_K_XL</dd>
+              </div>
+              <div>
+                <dt>Total time</dt>
+                <dd id="active-time">18 minutes</dd>
+              </div>
+              <div>
+                <dt>Process</dt>
+                <dd id="active-process">Installed dependencies and produced the project through a longer full setup flow.</dd>
+              </div>
+            </dl>
             <iframe
               id="result-frame"
               title="Selected LLM result"
-              src="./apps/claude/"
+              src="./apps/qwen27b/"
               loading="eager"
             ></iframe>
           </article>
