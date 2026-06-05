@@ -1,0 +1,4 @@
+/* Reset defaults only — app styling lives in App.css */
+body {
+  margin: 0;
+}

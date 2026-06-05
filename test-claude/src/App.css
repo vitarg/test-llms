@@ -1,0 +1,119 @@
+:root {
+  font-family: system-ui, -apple-system, sans-serif;
+  color: #1f2933;
+}
+
+body {
+  margin: 0;
+  background: #f5f7fa;
+}
+
+.app {
+  max-width: 640px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+.expense-form {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr auto;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.expense-form .error {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: #c0392b;
+  font-size: 0.85rem;
+}
+
+input,
+select,
+button {
+  padding: 0.5rem;
+  border: 1px solid #cbd2d9;
+  border-radius: 6px;
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+}
+
+.expense-item button {
+  background: transparent;
+  color: #9aa5b1;
+  border: none;
+  font-size: 1rem;
+}
+
+.expense-item button:hover {
+  color: #c0392b;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.5rem 0 0.5rem;
+}
+
+.expense-summary {
+  display: flex;
+  gap: 0.75rem;
+  align-items: baseline;
+}
+
+.expense-summary strong {
+  font-size: 1.25rem;
+}
+
+.expense-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.expense-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e4e7eb;
+}
+
+.expense-main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.expense-meta {
+  font-size: 0.8rem;
+  color: #7b8794;
+}
+
+.expense-amount {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.empty {
+  color: #7b8794;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+@media (max-width: 560px) {
+  .expense-form {
+    grid-template-columns: 1fr 1fr;
+  }
+}

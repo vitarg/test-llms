@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LLM Expense Tracker Results</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="workspace" aria-label="LLM results viewer">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">React + TypeScript prompt test</p>
+            <h1>Three LLM results</h1>
+          </div>
+          <nav class="model-switcher" aria-label="Choose model result">
+            <button class="switch-button is-active" type="button" data-model="claude">
+              Claude
+            </button>
+            <button class="switch-button" type="button" data-model="gpt">GPT</button>
+            <button class="switch-button" type="button" data-model="qwen27b">
+              Qwen 27B
+            </button>
+          </nav>
+        </header>
+
+        <section class="viewer-grid">
+          <article class="preview-panel" aria-labelledby="active-title">
+            <div class="preview-header">
+              <div>
+                <p class="eyebrow" id="active-model">Claude</p>
+                <h2 id="active-title">Expense tracker by Claude</h2>
+              </div>
+              <a class="open-link" id="open-result" href="./apps/claude/" target="_blank" rel="noreferrer">
+                Open
+              </a>
+            </div>
+            <p class="model-note" id="active-note">
+              Compact implementation with strongly separated hooks, utilities, types, and presentational components.
+            </p>
+            <iframe
+              id="result-frame"
+              title="Selected LLM result"
+              src="./apps/claude/"
+              loading="eager"
+            ></iframe>
+          </article>
+
+          <aside class="prompt-panel" aria-labelledby="prompt-title">
+            <div class="prompt-header">
+              <div>
+                <p class="eyebrow">Shared input</p>
+                <h2 id="prompt-title">Prompt</h2>
+              </div>
+              <a class="open-link" href="./prompt.md" target="_blank" rel="noreferrer">Raw</a>
+            </div>
+            <pre id="prompt-text">Loading prompt...</pre>
+          </aside>
+        </section>
+      </section>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
