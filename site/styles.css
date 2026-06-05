@@ -59,6 +59,20 @@ a {
   padding: 20px 0 4px;
 }
 
+.topbar > div:first-child {
+  flex: 1 1 auto;
+  min-width: 280px;
+}
+
+.header-controls {
+  display: flex;
+  flex: 0 1 477px;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  min-width: 0;
+}
+
 .eyebrow {
   margin: 0 0 4px;
   color: var(--accent-strong);
@@ -86,9 +100,22 @@ h2 {
 
 .model-switcher {
   display: grid;
+  flex: 1 1 300px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 6px;
-  min-width: min(100%, 360px);
+  min-width: 0;
+  max-width: 360px;
+  padding: 6px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface-alt);
+}
+
+.language-switcher {
+  display: grid;
+  flex: 0 0 auto;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
   padding: 6px;
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -106,13 +133,29 @@ h2 {
   white-space: nowrap;
 }
 
+.language-button {
+  min-width: 44px;
+  min-height: 40px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 6px;
+  color: var(--muted);
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
 .switch-button:hover,
-.switch-button:focus-visible {
+.switch-button:focus-visible,
+.language-button:hover,
+.language-button:focus-visible {
   color: var(--text);
   outline: 2px solid transparent;
 }
 
-.switch-button.is-active {
+.switch-button.is-active,
+.language-button.is-active {
   color: #ffffff;
   background: var(--accent);
   box-shadow: 0 6px 16px rgba(24, 106, 140, 0.24);
@@ -189,6 +232,7 @@ h2 {
   color: var(--text);
   font-size: 0.92rem;
   line-height: 1.42;
+  overflow-wrap: anywhere;
 }
 
 .open-link {
@@ -257,8 +301,14 @@ pre {
     flex-direction: column;
   }
 
+  .header-controls {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
   .model-switcher {
     width: 100%;
+    max-width: none;
     min-width: 0;
   }
 

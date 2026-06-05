@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,21 +8,27 @@
   </head>
   <body>
     <main class="shell">
-      <section class="workspace" aria-label="LLM results viewer">
+      <section class="workspace" aria-label="LLM results viewer" data-i18n-aria="workspaceLabel">
         <header class="topbar">
           <div>
-            <p class="eyebrow">React + TypeScript prompt test</p>
-            <h1>Three LLM results</h1>
+            <p class="eyebrow" data-i18n="eyebrow">React + TypeScript prompt test</p>
+            <h1 data-i18n="headline">Three LLM results</h1>
           </div>
-          <nav class="model-switcher" aria-label="Choose model result">
-            <button class="switch-button is-active" type="button" data-model="qwen27b">
-              Qwen 27B
-            </button>
-            <button class="switch-button" type="button" data-model="claude">
-              Claude
-            </button>
-            <button class="switch-button" type="button" data-model="gpt">GPT</button>
-          </nav>
+          <div class="header-controls">
+            <nav class="model-switcher" aria-label="Choose model result" data-i18n-aria="modelSwitcherLabel">
+              <button class="switch-button is-active" type="button" data-model="qwen27b">
+                Qwen 27B
+              </button>
+              <button class="switch-button" type="button" data-model="claude">
+                Claude
+              </button>
+              <button class="switch-button" type="button" data-model="gpt">GPT</button>
+            </nav>
+            <div class="language-switcher" aria-label="Choose language" data-i18n-aria="languageSwitcherLabel">
+              <button class="language-button is-active" type="button" data-lang="en">EN</button>
+              <button class="language-button" type="button" data-lang="ru">RU</button>
+            </div>
+          </div>
         </header>
 
         <section class="viewer-grid">
@@ -32,7 +38,7 @@
                 <p class="eyebrow" id="active-model">Qwen 27B</p>
                 <h2 id="active-title">Expense tracker by Qwen 27B</h2>
               </div>
-              <a class="open-link" id="open-result" href="./apps/qwen27b/" target="_blank" rel="noreferrer">
+              <a class="open-link" id="open-result" href="./apps/qwen27b/" target="_blank" rel="noreferrer" data-i18n="openResult">
                 Open
               </a>
             </div>
@@ -41,15 +47,15 @@
             </p>
             <dl class="model-meta" aria-label="Run details">
               <div>
-                <dt>Model</dt>
+                <dt data-i18n="modelLabel">Model</dt>
                 <dd id="active-model-name">Qwen3.6-27B-UD-Q8_K_XL</dd>
               </div>
               <div>
-                <dt>Total time</dt>
+                <dt data-i18n="timeLabel">Total time</dt>
                 <dd id="active-time">18 minutes</dd>
               </div>
               <div>
-                <dt>Process</dt>
+                <dt data-i18n="processLabel">Process</dt>
                 <dd id="active-process">Installed dependencies and produced the project through a longer full setup flow.</dd>
               </div>
             </dl>
@@ -64,10 +70,10 @@
           <aside class="prompt-panel" aria-labelledby="prompt-title">
             <div class="prompt-header">
               <div>
-                <p class="eyebrow">Shared input</p>
-                <h2 id="prompt-title">Prompt</h2>
+                <p class="eyebrow" data-i18n="promptEyebrow">Shared input</p>
+                <h2 id="prompt-title" data-i18n="promptTitle">Prompt</h2>
               </div>
-              <a class="open-link" href="./prompt.md" target="_blank" rel="noreferrer">Raw</a>
+              <a class="open-link" href="./prompt.md" target="_blank" rel="noreferrer" data-i18n="rawPrompt">Raw</a>
             </div>
             <pre id="prompt-text">Loading prompt...</pre>
           </aside>
