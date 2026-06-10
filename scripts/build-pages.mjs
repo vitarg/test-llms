@@ -8,6 +8,7 @@ const outputDir = resolve(root, "pages-dist");
 
 const projects = [
   { dir: "test-claude", target: "claude" },
+  { dir: "test-fable", target: "fable" },
   { dir: "test-gpt", target: "gpt" },
   { dir: "test-qwen27b", target: "qwen27b" },
 ];

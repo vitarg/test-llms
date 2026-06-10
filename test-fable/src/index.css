@@ -1,0 +1,116 @@
+:root {
+  font-family: system-ui, -apple-system, sans-serif;
+  color-scheme: light dark;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.app {
+  width: min(640px, 100% - 2rem);
+  padding: 2rem 0;
+}
+
+.expense-form {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr auto;
+  gap: 0.5rem;
+}
+
+.expense-form input,
+.expense-form select,
+.expense-form button,
+.category-filter select {
+  padding: 0.45rem 0.6rem;
+  border: 1px solid #999;
+  border-radius: 6px;
+  font: inherit;
+}
+
+.expense-form button {
+  cursor: pointer;
+}
+
+.app__toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.25rem 0 0.5rem;
+  gap: 1rem;
+}
+
+.category-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.expense-summary {
+  margin: 0;
+}
+
+.expense-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.expense-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #ccc3;
+  border-radius: 8px;
+}
+
+.expense-item__info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.expense-item__description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.expense-item__meta {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.expense-item__amount {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.expense-item button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+  opacity: 0.6;
+}
+
+.expense-item button:hover {
+  opacity: 1;
+}
+
+.expense-list__empty {
+  opacity: 0.7;
+}
+
+@media (max-width: 540px) {
+  .expense-form {
+    grid-template-columns: 1fr 1fr;
+  }
+}

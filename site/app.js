@@ -41,6 +41,27 @@ const results = {
       ru: "Написал код и отдал его в проект без установки зависимостей.",
     },
   },
+  fable: {
+    label: "Claude Fable",
+    model: "claude fable",
+    url: "./apps/fable/",
+    title: {
+      en: "Expense tracker by Claude Fable",
+      ru: "Трекер расходов от Claude Fable",
+    },
+    note: {
+      en: "Minimal but complete implementation with localStorage persistence, category filtering, totals, and deletion.",
+      ru: "Минималистичная, но цельная реализация с сохранением в localStorage, фильтрацией по категориям, итогами и удалением.",
+    },
+    time: {
+      en: "about 2 minutes",
+      ru: "около 2 минут",
+    },
+    process: {
+      en: "Installed dependencies and successfully produced a production build.",
+      ru: "Установил зависимости и успешно собрал production build.",
+    },
+  },
   gpt: {
     label: "GPT",
     model: "gpt 5.5 high",
@@ -69,7 +90,7 @@ const translations = {
     documentTitle: "LLM Expense Tracker Results",
     workspaceLabel: "LLM results viewer",
     eyebrow: "React + TypeScript prompt test",
-    headline: "Three LLM results",
+    headline: "Four LLM results",
     modelSwitcherLabel: "Choose model result",
     languageSwitcherLabel: "Choose language",
     openResult: "Open",
@@ -87,7 +108,7 @@ const translations = {
     documentTitle: "Результаты LLM Expense Tracker",
     workspaceLabel: "Просмотр результатов LLM",
     eyebrow: "Тест промпта React + TypeScript",
-    headline: "Три результата LLM",
+    headline: "Четыре результата LLM",
     modelSwitcherLabel: "Выбор результата модели",
     languageSwitcherLabel: "Выбор языка",
     openResult: "Открыть",
