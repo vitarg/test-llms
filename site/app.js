@@ -64,7 +64,7 @@ const results = {
   },
   gemma4: {
     label: "Gemma 4",
-    model: "gemma-4-26B-A4B-it-UD-Q6_K",
+    model: "Gemma 4 26B A4B Instruct UD Q6_K",
     url: "./apps/gemma4/",
     title: {
       en: "Expense tracker by Gemma 4",
