@@ -62,6 +62,27 @@ const results = {
       ru: "Установил зависимости и успешно собрал production build.",
     },
   },
+  gemma4: {
+    label: "Gemma 4",
+    model: "gemma-4-26B-A4B-it-UD-Q6_K",
+    url: "./apps/gemma4/",
+    title: {
+      en: "Expense tracker by Gemma 4",
+      ru: "Трекер расходов от Gemma 4",
+    },
+    note: {
+      en: "Small, functional implementation with add/delete flows, category filters, totals, and localStorage persistence, but with very plain UI and more fragile storage handling.",
+      ru: "Небольшая рабочая реализация с добавлением и удалением расходов, фильтрацией по категориям, итогами и localStorage, но с очень простой UI-подачей и более хрупкой обработкой storage.",
+    },
+    time: {
+      en: "2 minutes 33 seconds",
+      ru: "2 минуты 33 секунды",
+    },
+    process: {
+      en: "Created the React + TypeScript source quickly, but did not include project/build files until the result was integrated into this viewer.",
+      ru: "Быстро создал исходники React + TypeScript, но не добавил проектные и сборочные файлы до интеграции в эту витрину.",
+    },
+  },
   gpt: {
     label: "GPT",
     model: "gpt 5.5 high",
@@ -90,7 +111,7 @@ const translations = {
     documentTitle: "LLM Expense Tracker Results",
     workspaceLabel: "LLM results viewer",
     eyebrow: "React + TypeScript prompt test",
-    headline: "Four LLM results",
+    headline: "Five LLM results",
     modelSwitcherLabel: "Choose model result",
     languageSwitcherLabel: "Choose language",
     openResult: "Open",
@@ -108,7 +129,7 @@ const translations = {
     documentTitle: "Результаты LLM Expense Tracker",
     workspaceLabel: "Просмотр результатов LLM",
     eyebrow: "Тест промпта React + TypeScript",
-    headline: "Четыре результата LLM",
+    headline: "Пять результатов LLM",
     modelSwitcherLabel: "Выбор результата модели",
     languageSwitcherLabel: "Выбор языка",
     openResult: "Открыть",

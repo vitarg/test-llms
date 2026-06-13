@@ -6,6 +6,7 @@ pages-dist
 .DS_Store
 *.local
 *.log
+*.tsbuildinfo
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
