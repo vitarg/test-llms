@@ -54,6 +54,9 @@ jobs:
         run: npm ci
         working-directory: test-qwen27b
 
+      - name: Validate benchmark data
+        run: node scripts/validate-benchmark-data.mjs
+
       - name: Build Pages bundle
         run: node scripts/build-pages.mjs
 

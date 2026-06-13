@@ -3,78 +3,140 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LLM Expense Tracker Results</title>
+    <title>LLM Expense Tracker Benchmark</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <main class="shell">
-      <section class="workspace" aria-label="LLM results viewer" data-i18n-aria="workspaceLabel">
+      <section class="workspace" aria-label="LLM benchmark workspace" data-i18n-aria="workspaceLabel">
         <header class="topbar">
           <div>
-            <p class="eyebrow" data-i18n="eyebrow">React + TypeScript prompt test</p>
-            <h1 data-i18n="headline">Five LLM results</h1>
+            <p class="eyebrow" data-i18n="eyebrow">Fixed prompt benchmark</p>
+            <h1 data-i18n="headline">Local vs frontier model results</h1>
+            <p class="intro" data-i18n="intro">
+              One React + TypeScript expense tracker prompt, five frozen model outputs, scored by external product and engineering review.
+            </p>
           </div>
-          <div class="header-controls">
-            <nav class="model-switcher" aria-label="Choose model result" data-i18n-aria="modelSwitcherLabel">
-              <button class="switch-button is-active" type="button" data-model="qwen27b">
-                Qwen 27B
-              </button>
-              <button class="switch-button" type="button" data-model="claude">
-                Claude
-              </button>
-              <button class="switch-button" type="button" data-model="fable">
-                Fable
-              </button>
-              <button class="switch-button" type="button" data-model="gemma4">
-                Gemma 4
-              </button>
-              <button class="switch-button" type="button" data-model="gpt">GPT</button>
-            </nav>
-            <div class="language-switcher" aria-label="Choose language" data-i18n-aria="languageSwitcherLabel">
-              <button class="language-button is-active" type="button" data-lang="en">EN</button>
-              <button class="language-button" type="button" data-lang="ru">RU</button>
-            </div>
+          <div class="language-switcher" aria-label="Choose language" data-i18n-aria="languageSwitcherLabel">
+            <button class="language-button is-active" type="button" data-lang="en">EN</button>
+            <button class="language-button" type="button" data-lang="ru">RU</button>
           </div>
         </header>
 
-        <section class="viewer-grid">
-          <article class="preview-panel" aria-labelledby="active-title">
-            <div class="preview-header">
+        <section class="methodology" aria-labelledby="methodology-title">
+          <div>
+            <p class="eyebrow" data-i18n="methodologyEyebrow">Methodology</p>
+            <h2 id="methodology-title" data-i18n="methodologyTitle">How to read this benchmark</h2>
+          </div>
+          <ul>
+            <li data-i18n="methodologyOne">All models received the same fixed prompt.</li>
+            <li data-i18n="methodologyTwo">Generated apps are frozen artifacts and are not edited here.</li>
+            <li data-i18n="methodologyThree">Scores are external expert evaluation; build pass only means the app compiled.</li>
+            <li data-i18n="methodologyFour">Raw model outputs are marked unavailable unless explicitly captured.</li>
+          </ul>
+        </section>
+
+        <section class="summary-grid" id="summary-cards" aria-label="Benchmark summary" data-i18n-aria="summaryLabel"></section>
+
+        <section class="comparison-panel" aria-labelledby="comparison-title">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow" data-i18n="comparisonEyebrow">Scorecard</p>
+              <h2 id="comparison-title" data-i18n="comparisonTitle">Model comparison</h2>
+            </div>
+            <div class="filter-tabs" aria-label="Filter benchmark results" data-i18n-aria="filterLabel">
+              <button class="filter-button is-active" type="button" data-filter="all" data-i18n="filterAll">All</button>
+              <button class="filter-button" type="button" data-filter="local" data-i18n="filterLocal">Local</button>
+              <button class="filter-button" type="button" data-filter="frontier" data-i18n="filterFrontier">Frontier</button>
+              <button class="filter-button" type="button" data-filter="critical" data-i18n="filterCritical">Critical issues</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col" data-sort="label" data-i18n="columnModel">Model</th>
+                  <th scope="col" data-sort="modelType" data-i18n="columnType">Type</th>
+                  <th scope="col" data-sort="timeSeconds" data-i18n="columnTime">Time</th>
+                  <th scope="col" data-sort="buildStatus" data-i18n="columnBuild">Build</th>
+                  <th scope="col" data-sort="totalScore" data-i18n="columnScore">Score</th>
+                  <th scope="col" data-sort="verdict" data-i18n="columnVerdict">Verdict</th>
+                  <th scope="col" data-sort="criticalCount" data-i18n="columnIssues">Issues</th>
+                  <th scope="col" data-i18n="columnNote">Note</th>
+                </tr>
+              </thead>
+              <tbody id="results-table"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="detail-grid">
+          <article class="evidence-panel" aria-labelledby="active-title">
+            <div class="section-header">
               <div>
-                <p class="eyebrow" id="active-model">Qwen 27B</p>
-                <h2 id="active-title">Expense tracker by Qwen 27B</h2>
+                <p class="eyebrow" id="active-model-type">Frontier</p>
+                <h2 id="active-title">GPT</h2>
               </div>
-              <a class="open-link" id="open-result" href="./apps/qwen27b/" target="_blank" rel="noreferrer" data-i18n="openResult">
-                Open
+              <a class="open-link" id="open-result" href="./apps/gpt/" target="_blank" rel="noreferrer" data-i18n="openResult">
+                Open app
               </a>
             </div>
-            <p class="model-note" id="active-note">
-              Straightforward Vite implementation with category filtering, persisted expenses, and a visual header asset.
-            </p>
-            <dl class="model-meta" aria-label="Run details">
+
+            <div class="verdict-strip">
               <div>
-                <dt data-i18n="modelLabel">Model</dt>
-                <dd id="active-model-name">Qwen3.6-27B-UD-Q8_K_XL</dd>
+                <span data-i18n="scoreLabel">Score</span>
+                <strong id="active-score">84</strong>
               </div>
               <div>
-                <dt data-i18n="timeLabel">Total time</dt>
-                <dd id="active-time">18 minutes</dd>
+                <span data-i18n="verdictLabel">Verdict</span>
+                <strong id="active-verdict">usable_with_fixes</strong>
               </div>
               <div>
-                <dt data-i18n="processLabel">Process</dt>
-                <dd id="active-process">Installed dependencies and produced the project through a longer full setup flow.</dd>
+                <span data-i18n="buildLabel">Build</span>
+                <strong id="active-build">pass</strong>
               </div>
-            </dl>
+            </div>
+
+            <p class="model-note" id="active-note"></p>
+            <div class="score-bars" id="score-bars" aria-label="Score breakdown" data-i18n-aria="scoreBreakdownLabel"></div>
+
+            <div class="evidence-columns">
+              <section aria-labelledby="strengths-title">
+                <h3 id="strengths-title" data-i18n="strengthsTitle">Strengths</h3>
+                <ul id="strengths-list"></ul>
+              </section>
+              <section aria-labelledby="critical-title">
+                <h3 id="critical-title" data-i18n="criticalTitle">Critical issues</h3>
+                <ul id="critical-list"></ul>
+              </section>
+              <section aria-labelledby="evidence-title">
+                <h3 id="evidence-title" data-i18n="evidenceTitle">Evidence</h3>
+                <ul id="evidence-list"></ul>
+              </section>
+              <section aria-labelledby="completeness-title">
+                <h3 id="completeness-title" data-i18n="completenessTitle">Artifact completeness</h3>
+                <dl class="completeness-list" id="completeness-list"></dl>
+              </section>
+            </div>
+          </article>
+
+          <article class="preview-panel" aria-labelledby="preview-title">
+            <div class="section-header">
+              <div>
+                <p class="eyebrow" data-i18n="previewEyebrow">Frozen output</p>
+                <h2 id="preview-title" data-i18n="previewTitle">Selected app preview</h2>
+              </div>
+            </div>
             <iframe
               id="result-frame"
-              title="Selected LLM result"
-              src="./apps/qwen27b/"
+              title="Selected model output"
+              src="./apps/gpt/"
               loading="eager"
             ></iframe>
           </article>
 
           <aside class="prompt-panel" aria-labelledby="prompt-title">
-            <div class="prompt-header">
+            <div class="section-header">
               <div>
                 <p class="eyebrow" data-i18n="promptEyebrow">Shared input</p>
                 <h2 id="prompt-title" data-i18n="promptTitle">Prompt</h2>

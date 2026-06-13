@@ -1,0 +1,200 @@
+[
+  {
+    "id": "gpt",
+    "label": "GPT",
+    "modelName": "gpt 5.5 high",
+    "modelType": "frontier",
+    "appUrl": "./apps/gpt/",
+    "totalTime": "5 minutes total",
+    "timeSeconds": 300,
+    "buildStatus": "pass",
+    "scores": {
+      "promptAdherence": 4.5,
+      "domainLogic": 4,
+      "codeQuality": 4.5,
+      "ux": 4,
+      "ui": 4.5,
+      "mobile": 4,
+      "accessibility": 3.5,
+      "robustness": 3.5
+    },
+    "totalScore": 84,
+    "verdict": "usable_with_fixes",
+    "strengths": [
+      "Most polished dashboard-style interface in the set.",
+      "Clear state ownership with reusable expense helpers.",
+      "README includes structure, tradeoffs, and future improvements."
+    ],
+    "criticalIssues": [],
+    "evidence": [
+      "Empty state says no category match when there are no expenses.",
+      "Invalid submits are silently ignored instead of teaching the user what to fix.",
+      "Delete is immediate and has no undo or confirmation."
+    ],
+    "notes": "Strongest overall result, but still short of production-ready financial UX.",
+    "artifactCompleteness": {
+      "rawOutputAvailable": false,
+      "manualEditsKnown": true,
+      "readmeProvided": true
+    }
+  },
+  {
+    "id": "claude",
+    "label": "Claude",
+    "modelName": "claude 4.8 opus High",
+    "modelType": "frontier",
+    "appUrl": "./apps/claude/",
+    "totalTime": "2 minutes",
+    "timeSeconds": 120,
+    "buildStatus": "pass",
+    "scores": {
+      "promptAdherence": 4.5,
+      "domainLogic": 4.5,
+      "codeQuality": 4.5,
+      "ux": 3.5,
+      "ui": 3,
+      "mobile": 2,
+      "accessibility": 4,
+      "robustness": 4
+    },
+    "totalScore": 81,
+    "verdict": "usable_with_fixes",
+    "strengths": [
+      "Adds date handling beyond the minimum prompt.",
+      "Shows explicit validation errors.",
+      "Strong type modeling and separation of domain utilities."
+    ],
+    "criticalIssues": [],
+    "evidence": [
+      "Mobile form overflows at 390px viewport.",
+      "Visual hierarchy is functional but sparse.",
+      "Delete is immediate and has no undo or confirmation."
+    ],
+    "notes": "Technically strong, but mobile layout quality pulls down the product result.",
+    "artifactCompleteness": {
+      "rawOutputAvailable": false,
+      "manualEditsKnown": true,
+      "readmeProvided": false
+    }
+  },
+  {
+    "id": "fable",
+    "label": "Claude Fable",
+    "modelName": "claude fable",
+    "modelType": "frontier",
+    "appUrl": "./apps/fable/",
+    "totalTime": "about 2 minutes",
+    "timeSeconds": 120,
+    "buildStatus": "pass",
+    "scores": {
+      "promptAdherence": 4.5,
+      "domainLogic": 4.5,
+      "codeQuality": 4,
+      "ux": 3,
+      "ui": 2.5,
+      "mobile": 1.5,
+      "accessibility": 3.5,
+      "robustness": 3.5
+    },
+    "totalScore": 75,
+    "verdict": "usable_with_fixes",
+    "strengths": [
+      "Complete minimal implementation with date, persistence, filtering, totals, and deletion.",
+      "Keeps expense state centralized in a hook.",
+      "Uses typed category unions."
+    ],
+    "criticalIssues": [],
+    "evidence": [
+      "Mobile layout overflows and clips content at 390px viewport.",
+      "Dark color-scheme inheritance makes the result look less intentionally designed.",
+      "Empty state and summary are correct but not very informative."
+    ],
+    "notes": "Solid code baseline, weaker presentation and mobile fit.",
+    "artifactCompleteness": {
+      "rawOutputAvailable": false,
+      "manualEditsKnown": true,
+      "readmeProvided": false
+    }
+  },
+  {
+    "id": "qwen27b",
+    "label": "Qwen 27B",
+    "modelName": "Qwen3.6-27B-UD-Q8_K_XL",
+    "modelType": "local",
+    "appUrl": "./apps/qwen27b/",
+    "totalTime": "18 minutes",
+    "timeSeconds": 1080,
+    "buildStatus": "pass",
+    "scores": {
+      "promptAdherence": 3.5,
+      "domainLogic": 3.5,
+      "codeQuality": 3,
+      "ux": 3,
+      "ui": 3.5,
+      "mobile": 4,
+      "accessibility": 2,
+      "robustness": 2.5
+    },
+    "totalScore": 65,
+    "verdict": "partial",
+    "strengths": [
+      "Clean compact UI that holds up better on mobile than several frontier outputs.",
+      "Covers the core add, delete, filter, total, and persistence requirements.",
+      "Builds successfully as part of the Pages bundle."
+    ],
+    "criticalIssues": [],
+    "evidence": [
+      "README remains default Vite template.",
+      "Amount and category controls in the form lack visible labels or accessible names.",
+      "Storage serializes each expense as a JSON string inside a JSON array, which is unnecessarily fragile."
+    ],
+    "notes": "Best local result in this set, but less complete against the full prompt and weaker on accessibility.",
+    "artifactCompleteness": {
+      "rawOutputAvailable": false,
+      "manualEditsKnown": true,
+      "readmeProvided": false
+    }
+  },
+  {
+    "id": "gemma4",
+    "label": "Gemma 4",
+    "modelName": "Gemma 4 26B A4B Instruct UD Q6_K",
+    "modelType": "local",
+    "appUrl": "./apps/gemma4/",
+    "totalTime": "2 minutes 33 seconds",
+    "timeSeconds": 153,
+    "buildStatus": "pass",
+    "scores": {
+      "promptAdherence": 3,
+      "domainLogic": 1.5,
+      "codeQuality": 2,
+      "ux": 2,
+      "ui": 1.5,
+      "mobile": 3,
+      "accessibility": 1.5,
+      "robustness": 1
+    },
+    "totalScore": 41,
+    "verdict": "critical_bug",
+    "strengths": [
+      "Includes the basic add, delete, filter, total, and persistence flow.",
+      "Builds successfully after integration into the viewer.",
+      "Simple enough to inspect quickly."
+    ],
+    "criticalIssues": [
+      "Allows negative expense amount and displays a negative total."
+    ],
+    "evidence": [
+      "Amount input accepts -10 and creates Total Expenses: $-10.00.",
+      "Storage load does not catch corrupted localStorage JSON.",
+      "Amount input has no accessible name in the DOM snapshot.",
+      "Most component styling is inline, making consistency and maintenance weaker."
+    ],
+    "notes": "Fast local output, but the negative amount bug makes the product result misleading.",
+    "artifactCompleteness": {
+      "rawOutputAvailable": false,
+      "manualEditsKnown": true,
+      "readmeProvided": false
+    }
+  }
+]
