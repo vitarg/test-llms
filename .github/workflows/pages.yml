@@ -29,12 +29,22 @@ jobs:
           cache: npm
           cache-dependency-path: |
             test-claude/package-lock.json
+            test-fable/package-lock.json
+            test-gemma4/package-lock.json
             test-gpt/package-lock.json
             test-qwen27b/package-lock.json
 
       - name: Install Claude app dependencies
         run: npm ci
         working-directory: test-claude
+
+      - name: Install Fable app dependencies
+        run: npm ci
+        working-directory: test-fable
+
+      - name: Install Gemma 4 app dependencies
+        run: npm ci
+        working-directory: test-gemma4
 
       - name: Install GPT app dependencies
         run: npm ci
