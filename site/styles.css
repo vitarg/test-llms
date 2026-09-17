@@ -153,6 +153,10 @@ h3 {
   box-shadow: 0 6px 16px rgba(23, 107, 87, 0.22);
 }
 
+[hidden] {
+  display: none !important;
+}
+
 .methodology,
 .comparison-panel,
 .evidence-panel,
@@ -389,6 +393,12 @@ td small {
   font-size: 0.9rem;
 }
 
+.score-row > span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
 .score-meter {
   height: 8px;
   overflow: hidden;
@@ -465,6 +475,11 @@ td small {
 .preview-panel .section-header,
 .prompt-panel .section-header {
   padding: 18px 18px 12px;
+}
+
+.preview-panel > .model-note,
+.prompt-panel > .model-note {
+  padding: 0 18px;
 }
 
 .open-link {
@@ -564,7 +579,7 @@ pre {
   }
 
   .score-row {
-    grid-template-columns: 88px minmax(80px, 1fr) 46px;
+    grid-template-columns: minmax(0, 1fr) minmax(55px, 1fr) 46px;
   }
 
   iframe {

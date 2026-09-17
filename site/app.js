@@ -1,162 +1,4 @@
-const scoreLabels = {
-  promptAdherence: { en: "Prompt", ru: "Промпт" },
-  domainLogic: { en: "Domain logic", ru: "Логика" },
-  codeQuality: { en: "Code quality", ru: "Код" },
-  ux: { en: "UX", ru: "UX" },
-  ui: { en: "UI", ru: "UI" },
-  mobile: { en: "Mobile", ru: "Мобайл" },
-  accessibility: { en: "A11y", ru: "A11y" },
-  robustness: { en: "Robustness", ru: "Надежность" },
-};
-
-const translations = {
-  en: {
-    documentTitle: "LLM Expense Tracker Benchmark",
-    workspaceLabel: "LLM benchmark workspace",
-    languageSwitcherLabel: "Choose language",
-    eyebrow: "Fixed prompt benchmark",
-    headline: "Local vs frontier model results",
-    intro:
-      "One React + TypeScript expense tracker prompt, seven frozen model outputs, scored by external product and engineering review.",
-    methodologyEyebrow: "Methodology",
-    methodologyTitle: "How to read this benchmark",
-    methodologyOne: "All models received the same fixed prompt.",
-    methodologyTwo: "Generated apps are frozen artifacts and are not edited here.",
-    methodologyThree:
-      "Scores are external expert evaluation; build pass only means the app compiled.",
-    methodologyFour:
-      "Raw model outputs are marked unavailable unless explicitly captured.",
-    summaryLabel: "Benchmark summary",
-    bestOverall: "Best overall",
-    bestLocal: "Best local",
-    bestFrontier: "Best frontier",
-    fastest: "Fastest",
-    criticalCount: "Critical issues",
-    noCritical: "No critical issues",
-    evidenceRecorded: "Evidence recorded",
-    comparisonEyebrow: "Scorecard",
-    comparisonTitle: "Model comparison",
-    filterLabel: "Filter benchmark results",
-    filterAll: "All",
-    filterLocal: "Local",
-    filterFrontier: "Frontier",
-    filterCritical: "Critical issues",
-    columnModel: "Model",
-    columnType: "Type",
-    columnTime: "Time",
-    columnBuild: "Build",
-    columnScore: "Score",
-    columnVerdict: "Verdict",
-    columnIssues: "Issues",
-    columnNote: "Note",
-    openResult: "Open app",
-    scoreLabel: "Score",
-    verdictLabel: "Verdict",
-    buildLabel: "Build",
-    scoreBreakdownLabel: "Score breakdown",
-    strengthsTitle: "Strengths",
-    criticalTitle: "Critical issues",
-    evidenceTitle: "Evidence",
-    completenessTitle: "Artifact completeness",
-    previewEyebrow: "Frozen output",
-    previewTitle: "Selected app preview",
-    promptEyebrow: "Shared input",
-    promptTitle: "Prompt",
-    rawPrompt: "Raw",
-    loadingPrompt: "Loading prompt...",
-    promptError:
-      "Prompt could not be loaded. Open prompt.md from the published site root.",
-    benchmarkError: "Benchmark data could not be loaded.",
-    none: "None observed",
-    local: "Local",
-    frontier: "Frontier",
-    pass: "Pass",
-    fail: "Fail",
-    yes: "Yes",
-    no: "No",
-    rawOutputAvailable: "Raw output available",
-    manualEditsKnown: "Manual edits known",
-    readmeProvided: "README provided",
-    ready: "Ready",
-    usable_with_fixes: "Usable with fixes",
-    partial: "Partial",
-    failed: "Failed",
-    critical_bug: "Critical bug",
-  },
-  ru: {
-    documentTitle: "Benchmark LLM Expense Tracker",
-    workspaceLabel: "Рабочая область benchmark LLM",
-    languageSwitcherLabel: "Выбор языка",
-    eyebrow: "Benchmark фиксированного промпта",
-    headline: "Локальные модели против frontier-моделей",
-    intro:
-      "Один промпт React + TypeScript expense tracker, семь замороженных результатов моделей и внешняя продуктово-инженерная оценка.",
-    methodologyEyebrow: "Методология",
-    methodologyTitle: "Как читать этот benchmark",
-    methodologyOne: "Все модели получили один и тот же фиксированный промпт.",
-    methodologyTwo: "Generated apps являются замороженными артефактами и здесь не редактируются.",
-    methodologyThree:
-      "Оценки являются внешней экспертной оценкой; успешная сборка означает только, что приложение скомпилировалось.",
-    methodologyFour:
-      "Raw model outputs считаются недоступными, если они явно не зафиксированы.",
-    summaryLabel: "Сводка benchmark",
-    bestOverall: "Лучший общий",
-    bestLocal: "Лучший local",
-    bestFrontier: "Лучший frontier",
-    fastest: "Самый быстрый",
-    criticalCount: "Критичные проблемы",
-    noCritical: "Критичных проблем нет",
-    evidenceRecorded: "Evidence зафиксирован",
-    comparisonEyebrow: "Scorecard",
-    comparisonTitle: "Сравнение моделей",
-    filterLabel: "Фильтр результатов benchmark",
-    filterAll: "Все",
-    filterLocal: "Local",
-    filterFrontier: "Frontier",
-    filterCritical: "Критичные",
-    columnModel: "Модель",
-    columnType: "Тип",
-    columnTime: "Время",
-    columnBuild: "Сборка",
-    columnScore: "Score",
-    columnVerdict: "Verdict",
-    columnIssues: "Проблемы",
-    columnNote: "Заметка",
-    openResult: "Открыть app",
-    scoreLabel: "Score",
-    verdictLabel: "Verdict",
-    buildLabel: "Сборка",
-    scoreBreakdownLabel: "Разбивка score",
-    strengthsTitle: "Сильные стороны",
-    criticalTitle: "Критичные проблемы",
-    evidenceTitle: "Evidence",
-    completenessTitle: "Полнота артефакта",
-    previewEyebrow: "Замороженный результат",
-    previewTitle: "Preview выбранного app",
-    promptEyebrow: "Общий ввод",
-    promptTitle: "Промпт",
-    rawPrompt: "Исходник",
-    loadingPrompt: "Загружаем промпт...",
-    promptError:
-      "Промпт не удалось загрузить. Откройте prompt.md из корня опубликованного сайта.",
-    benchmarkError: "Данные benchmark не удалось загрузить.",
-    none: "Не обнаружено",
-    local: "Local",
-    frontier: "Frontier",
-    pass: "Pass",
-    fail: "Fail",
-    yes: "Да",
-    no: "Нет",
-    rawOutputAvailable: "Raw output доступен",
-    manualEditsKnown: "Ручные правки известны",
-    readmeProvided: "README предоставлен",
-    ready: "Ready",
-    usable_with_fixes: "Usable with fixes",
-    partial: "Partial",
-    failed: "Failed",
-    critical_bug: "Critical bug",
-  },
-};
+import { scoreLabels, translations } from "./i18n.js";
 
 const state = {
   currentLanguage: getInitialLanguage(),
@@ -165,7 +7,8 @@ const state = {
   filter: "all",
   sortKey: "totalScore",
   sortDirection: "desc",
-  promptLoaded: false,
+  prompts: {},
+  benchmarkStatus: "loading",
 };
 
 const elements = {
@@ -188,17 +31,29 @@ const elements = {
   resultFrame: document.querySelector("#result-frame"),
   openResult: document.querySelector("#open-result"),
   promptText: document.querySelector("#prompt-text"),
+  modelPanels: document.querySelectorAll("[data-model-panel]"),
 };
 
 function t(key) {
   return translations[state.currentLanguage][key] ?? translations.en[key] ?? key;
 }
 
-function getInitialLanguage() {
-  const savedLanguage = localStorage.getItem("llm-benchmark-language");
+function resultText(result) {
+  return result.translations?.[state.currentLanguage] ?? result;
+}
 
-  if (savedLanguage === "ru" || savedLanguage === "en") {
-    return savedLanguage;
+function formatNumber(value) {
+  return new Intl.NumberFormat(state.currentLanguage).format(value);
+}
+
+function getInitialLanguage() {
+  try {
+    const savedLanguage = localStorage.getItem("llm-benchmark-language");
+    if (savedLanguage === "ru" || savedLanguage === "en") {
+      return savedLanguage;
+    }
+  } catch {
+    // Language switching also works when browser storage is unavailable.
   }
 
   return navigator.language.toLowerCase().startsWith("ru") ? "ru" : "en";
@@ -216,15 +71,17 @@ function applyStaticTranslations() {
     element.setAttribute("aria-label", t(element.dataset.i18nAria));
   });
 
+  document.querySelectorAll("[data-i18n-title]").forEach((element) => {
+    element.setAttribute("title", t(element.dataset.i18nTitle));
+  });
+
   elements.languageButtons.forEach((button) => {
     const isActive = button.dataset.lang === state.currentLanguage;
     button.classList.toggle("is-active", isActive);
     button.setAttribute("aria-pressed", String(isActive));
   });
 
-  if (!state.promptLoaded) {
-    elements.promptText.textContent = t("loadingPrompt");
-  }
+  renderPrompt();
 }
 
 function createElement(tag, className, text) {
@@ -295,7 +152,7 @@ function renderSummary() {
     {
       label: t("fastest"),
       value: fastestResult()?.label ?? "-",
-      detail: fastestResult()?.totalTime ?? "-",
+      detail: fastestResult() ? resultText(fastestResult()).totalTime : "-",
     },
     {
       label: t("criticalCount"),
@@ -352,6 +209,15 @@ function compareResults(a, b) {
 function renderTable() {
   elements.resultsTable.textContent = "";
 
+  if (state.benchmarkStatus !== "ready") {
+    const row = document.createElement("tr");
+    const cell = createElement("td", null, t(state.benchmarkStatus === "error" ? "benchmarkError" : "benchmarkLoading"));
+    cell.colSpan = 8;
+    row.append(cell);
+    elements.resultsTable.append(row);
+    return;
+  }
+
   filteredResults().forEach((result) => {
     const row = document.createElement("tr");
     row.className = result.id === state.selectedId ? "is-selected" : "";
@@ -366,7 +232,7 @@ function renderTable() {
     const type = createElement("td");
     type.append(createBadge(formatType(result.modelType), result.modelType));
 
-    const time = createElement("td", null, result.totalTime);
+    const time = createElement("td", null, resultText(result).totalTime);
 
     const build = createElement("td");
     build.append(createBadge(formatBuild(result.buildStatus), result.buildStatus));
@@ -377,7 +243,7 @@ function renderTable() {
     verdict.append(createBadge(formatVerdict(result.verdict), result.verdict));
 
     const issues = createElement("td", null, String(result.criticalIssues.length));
-    const note = createElement("td", null, result.notes);
+    const note = createElement("td", null, resultText(result).notes);
 
     row.append(model, type, time, build, score, verdict, issues, note);
 
@@ -417,7 +283,7 @@ function renderScoreBars(result) {
     const fill = createElement("span");
     fill.style.width = `${(value / 5) * 100}%`;
     meter.append(fill);
-    const score = createElement("strong", null, `${value}/5`);
+    const score = createElement("strong", null, `${formatNumber(value)}/5`);
     row.append(label, meter, score);
     elements.scoreBars.append(row);
   });
@@ -442,20 +308,24 @@ function setActiveResult(modelId, syncUrl = false) {
   }
 
   state.selectedId = result.id;
+  elements.modelPanels.forEach((panel) => { panel.hidden = false; });
 
   elements.activeModelType.textContent = formatType(result.modelType);
   elements.activeTitle.textContent = `${result.label} - ${result.modelName}`;
   elements.activeScore.textContent = `${result.totalScore}/100`;
   elements.activeVerdict.textContent = formatVerdict(result.verdict);
   elements.activeBuild.textContent = formatBuild(result.buildStatus);
-  elements.activeNote.textContent = result.notes;
-  elements.resultFrame.src = result.appUrl;
+  elements.activeNote.textContent = resultText(result).notes;
+  if (elements.resultFrame.getAttribute("src") !== result.appUrl) {
+    elements.resultFrame.src = result.appUrl;
+  }
   elements.openResult.href = result.appUrl;
 
   renderScoreBars(result);
-  renderList(elements.strengthsList, result.strengths);
-  renderList(elements.criticalList, result.criticalIssues);
-  renderList(elements.evidenceList, result.evidence);
+  const localized = resultText(result);
+  renderList(elements.strengthsList, localized.strengths);
+  renderList(elements.criticalList, localized.criticalIssues);
+  renderList(elements.evidenceList, localized.evidence);
   renderCompleteness(result);
   renderTable();
 
@@ -507,7 +377,11 @@ function setupEvents() {
   elements.languageButtons.forEach((button) => {
     button.addEventListener("click", () => {
       state.currentLanguage = button.dataset.lang;
-      localStorage.setItem("llm-benchmark-language", state.currentLanguage);
+      try {
+        localStorage.setItem("llm-benchmark-language", state.currentLanguage);
+      } catch {
+        // Keep the selected language for this page even if it cannot be saved.
+      }
       applyStaticTranslations();
       renderSummary();
       renderTable();
@@ -539,27 +413,37 @@ async function loadBenchmarkData() {
   }
   state.results = await response.json();
   state.results.sort((a, b) => b.totalScore - a.totalScore);
+  state.benchmarkStatus = "ready";
 }
 
-async function loadPrompt() {
+function renderPrompt() {
+  const prompt = state.prompts[state.currentLanguage];
+  elements.promptText.lang = state.currentLanguage;
+  elements.promptText.textContent = prompt === undefined
+    ? t("loadingPrompt")
+    : prompt === null ? t("promptError") : prompt;
+}
+
+async function loadPrompt(language) {
   try {
-    const response = await fetch("./prompt.md");
+    const response = await fetch(language === "en" ? "./prompt.md" : "./prompt.ru.md");
     if (!response.ok) {
       throw new Error(`Prompt request failed: ${response.status}`);
     }
     const prompt = await response.text();
-    state.promptLoaded = true;
-    elements.promptText.textContent = prompt.trim();
+    state.prompts[language] = prompt.trim();
   } catch {
-    state.promptLoaded = true;
-    elements.promptText.textContent = t("promptError");
+    state.prompts[language] = null;
   }
+  renderPrompt();
 }
 
 async function init() {
   applyStaticTranslations();
   setupEvents();
-  loadPrompt();
+  renderTable();
+  loadPrompt("en");
+  loadPrompt("ru");
 
   try {
     await loadBenchmarkData();
@@ -567,7 +451,8 @@ async function init() {
     setFilter("all");
     setActiveResult(initialModelId(), true);
   } catch {
-    elements.resultsTable.innerHTML = `<tr><td colspan="8">${t("benchmarkError")}</td></tr>`;
+    state.benchmarkStatus = "error";
+    renderTable();
   }
 }
 

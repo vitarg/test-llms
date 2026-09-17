@@ -71,13 +71,13 @@
         </section>
 
         <section class="detail-grid">
-          <article class="evidence-panel" aria-labelledby="active-title">
+          <article class="evidence-panel" aria-labelledby="active-title" data-model-panel hidden>
             <div class="section-header">
               <div>
-                <p class="eyebrow" id="active-model-type">Frontier</p>
-                <h2 id="active-title">GPT</h2>
+                <p class="eyebrow" id="active-model-type"></p>
+                <h2 id="active-title"></h2>
               </div>
-              <a class="open-link" id="open-result" href="./apps/gpt/" target="_blank" rel="noreferrer" data-i18n="openResult">
+              <a class="open-link" id="open-result" target="_blank" rel="noreferrer" data-i18n="openResult">
                 Open app
               </a>
             </div>
@@ -85,15 +85,15 @@
             <div class="verdict-strip">
               <div>
                 <span data-i18n="scoreLabel">Score</span>
-                <strong id="active-score">84</strong>
+                <strong id="active-score"></strong>
               </div>
               <div>
                 <span data-i18n="verdictLabel">Verdict</span>
-                <strong id="active-verdict">usable_with_fixes</strong>
+                <strong id="active-verdict"></strong>
               </div>
               <div>
                 <span data-i18n="buildLabel">Build</span>
-                <strong id="active-build">pass</strong>
+                <strong id="active-build"></strong>
               </div>
             </div>
 
@@ -120,17 +120,18 @@
             </div>
           </article>
 
-          <article class="preview-panel" aria-labelledby="preview-title">
+          <article class="preview-panel" aria-labelledby="preview-title" data-model-panel hidden>
             <div class="section-header">
               <div>
                 <p class="eyebrow" data-i18n="previewEyebrow">Frozen output</p>
                 <h2 id="preview-title" data-i18n="previewTitle">Selected app preview</h2>
               </div>
             </div>
+            <p class="model-note" data-i18n="previewLanguageNote">Original model output in English. Preserved unchanged for comparison.</p>
             <iframe
               id="result-frame"
-              title="Selected model output"
-              src="./apps/gpt/"
+              title="Selected model output (English)"
+              data-i18n-title="previewFrameTitle"
               loading="eager"
             ></iframe>
           </article>
@@ -141,8 +142,9 @@
                 <p class="eyebrow" data-i18n="promptEyebrow">Shared input</p>
                 <h2 id="prompt-title" data-i18n="promptTitle">Prompt</h2>
               </div>
-              <a class="open-link" href="./prompt.md" target="_blank" rel="noreferrer" data-i18n="rawPrompt">Raw</a>
+              <a class="open-link" href="./prompt.md" hreflang="en" target="_blank" rel="noreferrer" data-i18n="rawPrompt">Original (English)</a>
             </div>
+            <p class="model-note" data-i18n="promptLanguageNote">Original prompt sent to every model.</p>
             <pre id="prompt-text">Loading prompt...</pre>
           </aside>
         </section>

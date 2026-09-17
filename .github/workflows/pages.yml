@@ -67,6 +67,9 @@ jobs:
       - name: Validate benchmark data
         run: node scripts/validate-benchmark-data.mjs
 
+      - name: Validate localization
+        run: node scripts/validate-localization.mjs
+
       - name: Build Pages bundle
         run: node scripts/build-pages.mjs
 
