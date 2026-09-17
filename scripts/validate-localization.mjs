@@ -36,6 +36,9 @@ for (const language of languages) {
     for (const key of ["notes", "totalTime"]) {
       checkText(localized[key], `${result.id}.${language}.${key}`, language);
     }
+    if (result.previewNote !== undefined) {
+      checkText(localized.previewNote, `${result.id}.${language}.previewNote`, language);
+    }
     for (const key of ["strengths", "criticalIssues", "evidence"]) {
       assert.ok(Array.isArray(localized[key]), `${result.id}.${language}.${key}: expected an array`);
       assert.equal(localized[key].length, result[key].length, `${result.id}.${language}.${key}: translated item count differs`);

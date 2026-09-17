@@ -29,6 +29,7 @@ const elements = {
   evidenceList: document.querySelector("#evidence-list"),
   completenessList: document.querySelector("#completeness-list"),
   resultFrame: document.querySelector("#result-frame"),
+  previewNote: document.querySelector("#preview-note"),
   openResult: document.querySelector("#open-result"),
   promptText: document.querySelector("#prompt-text"),
   modelPanels: document.querySelectorAll("[data-model-panel]"),
@@ -316,6 +317,7 @@ function setActiveResult(modelId, syncUrl = false) {
   elements.activeVerdict.textContent = formatVerdict(result.verdict);
   elements.activeBuild.textContent = formatBuild(result.buildStatus);
   elements.activeNote.textContent = resultText(result).notes;
+  elements.previewNote.textContent = resultText(result).previewNote ?? t("previewLanguageNote");
   if (elements.resultFrame.getAttribute("src") !== result.appUrl) {
     elements.resultFrame.src = result.appUrl;
   }

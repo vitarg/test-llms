@@ -3,7 +3,7 @@ import { Expense, FilterCategory, ExpenseFormData } from '../types';
 import { generateId } from '../utils/formatters';
 import { useLocalStorage } from './useLocalStorage';
 
-const STORAGE_KEY = 'expense-tracker-data';
+const STORAGE_KEY = 'laguna-expense-tracker-data';
 
 export function useExpenses() {
   const [expenses, setExpenses] = useLocalStorage<Expense[]>(

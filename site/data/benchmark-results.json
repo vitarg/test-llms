@@ -439,28 +439,28 @@
       "The supplied final-response excerpt explains the file structure, tradeoffs, and possible improvements."
     ],
     "criticalIssues": [
-      "index.html never imports src/main.tsx. The production build is a blank page, so none of the expense workflows can be used."
+      "The original index.html did not import src/main.tsx and produced a blank page. The entry script was added manually for this preview; the original result keeps its critical-bug verdict."
     ],
     "evidence": [
-      "npm run build transforms only one module and emits a 246-byte dist/index.html with an empty #root and no script or asset bundle. The browser accessibility tree contains only the document title.",
-      "Scores assess the unmodified delivered artifact: prompt, logic, and code scores include source inspection; UX, UI, mobile, and accessibility receive zero because no usable interface is rendered. The intended component layout was not scored as a working app.",
+      "Before manual fixes, npm run build transformed only one module and emitted a 246-byte dist/index.html with an empty #root and no script or asset bundle. The original browser accessibility tree contained only the document title.",
+      "The 39/100 score assesses the original submission before manual fixes: source inspection informed prompt, logic, and code scores; UX, UI, mobile, and accessibility received zero because no interface rendered. The repaired preview has not been rescored.",
       "npm run build runs Vite alone; npm run lint and npm run typecheck were also executed separately and passed. A successful build therefore does not establish that the application starts.",
-      "Source inspection: useLocalStorage casts parsed JSON to T without validating its shape. Restoring the entry point would expose reduce/filter failures for valid non-array JSON.",
+      "Source inspection: useLocalStorage still casts parsed JSON to T without validating its shape. Valid non-array JSON in its storage key can cause reduce/filter failures.",
       "Source inspection: failed storage writes are swallowed while React state updates and the form clears, so unsaved changes would appear successful.",
-      "Source inspection: expense-tracker-data is also used by Qwen, which stores an array of JSON strings instead of expense objects. Once mounted on the same origin, these apps would read incompatible data.",
+      "The original expense-tracker-data key collided with Qwen, which stores JSON strings rather than expense objects. The preview now uses laguna-expense-tracker-data to keep both apps independent on the same origin.",
       "Source inspection: today() uses a UTC date and formatDate() parses date-only values into timestamps; these can shift calendar dates across time zones. Amounts are summed as floating-point numbers.",
-      "No README or automated tests were supplied. Only the final-response excerpt is available, not the full raw model output. Application source and entry HTML were preserved unchanged for this evaluation."
+      "No README or automated tests were supplied by the model. Only the final-response excerpt is available, not the full raw output. The original artifact is preserved in commit 0fbc5d5; the published preview adds the entry script, base: ./, and a unique storage key manually."
     ],
-    "notes": "Readable source and passing static checks, but the delivered page never mounts React. The missing entry script makes the result unusable as shipped.",
+    "notes": "Original submission: 39/100 due to a missing entry script. The published preview now runs after documented manual integration fixes; the original score is unchanged.",
     "artifactCompleteness": {
       "rawOutputAvailable": false,
-      "manualEditsKnown": false,
+      "manualEditsKnown": true,
       "readmeProvided": false
     },
     "translations": {
       "ru": {
         "totalTime": "14 минут 34 секунды",
-        "notes": "Понятный код и успешные статические проверки, но предоставленная страница не запускает React. Из-за отсутствующего подключения точки входа приложением нельзя пользоваться.",
+        "notes": "Исходный результат: 39/100 из-за отсутствующего подключения точки входа. Опубликованная версия запускается после описанных ручных исправлений; исходная оценка сохранена.",
         "strengths": [
           "Есть запрошенная структура components, hooks, types и utils, единый хук расходов и типизированные категории.",
           "В коде реализованы добавление, удаление, фильтрация, итог по фильтру, ввод даты и сохранение в localStorage; поля имеют подписи, а кнопки удаления — понятные имена для вспомогательных технологий.",
@@ -468,19 +468,21 @@
           "Предоставленный фрагмент итогового ответа объясняет структуру файлов, компромиссы и возможные улучшения."
         ],
         "criticalIssues": [
-          "В index.html не подключён src/main.tsx. Собранная версия показывает пустую страницу, поэтому ни один сценарий учёта расходов недоступен."
+          "В исходном index.html не был подключён src/main.tsx, поэтому отображалась пустая страница. Для предпросмотра подключение добавлено вручную; вердикт «Критическая ошибка» сохранён для исходного результата."
         ],
         "evidence": [
-          "npm run build обрабатывает только один модуль и создаёт dist/index.html размером 246 байт: пустой #root, без скриптов и файлов приложения. В дереве доступности браузера присутствует только заголовок документа.",
-          "Оценён предоставленный артефакт без исправлений: баллы за промпт, логику и код учитывают чтение исходников; удобство, дизайн, мобильная версия и доступность получили ноль, поскольку интерфейс не появляется. Предполагаемая вёрстка компонентов не оценивалась как работающее приложение.",
+          "До ручных исправлений npm run build обрабатывал один модуль и создавал dist/index.html размером 246 байт: пустой #root, без скриптов и файлов приложения. В дереве доступности исходной версии присутствовал только заголовок документа.",
+          "Оценка 39/100 относится к исходному результату до ручных исправлений: баллы за промпт, логику и код учитывают чтение исходников; удобство, дизайн, мобильная версия и доступность получили ноль, поскольку интерфейс не появлялся. Версия для предпросмотра повторно не оценивалась.",
           "npm run build запускает только Vite; npm run lint и npm run typecheck выполнены отдельно и также прошли. Успешная сборка здесь не подтверждает запуск приложения.",
-          "По коду: useLocalStorage приводит разобранный JSON к типу T без проверки структуры. После подключения точки входа корректный JSON, не являющийся массивом, приводил бы к ошибкам reduce/filter.",
+          "По коду: useLocalStorage по-прежнему приводит разобранный JSON к типу T без проверки структуры. Корректный JSON, не являющийся массивом, в его ключе хранилища может приводить к ошибкам reduce/filter.",
           "По коду: ошибки записи в хранилище подавляются, хотя состояние React обновляется и форма очищается; несохранённые изменения выглядели бы успешными.",
-          "По коду: ключ expense-tracker-data совпадает с ключом Qwen, который хранит массив строк JSON вместо объектов расходов. После запуска на одном домене приложения читали бы несовместимые данные.",
+          "Исходный ключ expense-tracker-data совпадал с ключом Qwen, который хранит строки JSON вместо объектов расходов. В опубликованной версии используется laguna-expense-tracker-data, чтобы приложения не мешали друг другу на одном домене.",
           "По коду: today() использует дату UTC, а formatDate() превращает календарную дату в момент времени; в разных часовых поясах это может сдвигать день. Суммы складываются как числа с плавающей точкой.",
-          "README и автоматические тесты не предоставлены. Доступен только фрагмент итогового ответа, а не полный исходный вывод модели. Код приложения и входной HTML при оценке сохранены без изменений."
-        ]
+          "Модель не предоставила README и автоматические тесты. Доступен только фрагмент итогового ответа, а не полный исходный вывод. Исходный артефакт сохранён в коммите 0fbc5d5; для публикации вручную добавлены подключение точки входа, base: ./ и отдельный ключ хранилища."
+        ],
+        "previewNote": "Версия с ручными исправлениями: подключена точка входа React, настроены относительные пути для GitHub Pages и отделено хранилище от Qwen. Оценка 39/100 и вердикт «Критическая ошибка» по-прежнему относятся к исходному результату с пустой страницей."
       }
-    }
+    },
+    "previewNote": "Manually repaired preview: connected the React entry point, configured relative asset paths for GitHub Pages, and isolated storage from Qwen. The 39/100 score and critical-bug verdict still describe the original blank-page submission."
   }
 ]

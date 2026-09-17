@@ -30,7 +30,7 @@
           </div>
           <ul>
             <li data-i18n="methodologyOne">All models received the same fixed prompt.</li>
-            <li data-i18n="methodologyTwo">Generated apps are frozen artifacts and are not edited here.</li>
+            <li data-i18n="methodologyTwo">Scores refer to the original submissions. Manual changes needed for published previews are documented.</li>
             <li data-i18n="methodologyThree">Scores are external expert evaluation; build pass only means the app compiled.</li>
             <li data-i18n="methodologyFour">Raw model outputs are marked unavailable unless explicitly captured.</li>
           </ul>
@@ -123,11 +123,11 @@
           <article class="preview-panel" aria-labelledby="preview-title" data-model-panel hidden>
             <div class="section-header">
               <div>
-                <p class="eyebrow" data-i18n="previewEyebrow">Frozen output</p>
+                <p class="eyebrow" data-i18n="previewEyebrow">Model output</p>
                 <h2 id="preview-title" data-i18n="previewTitle">Selected app preview</h2>
               </div>
             </div>
-            <p class="model-note" data-i18n="previewLanguageNote">Original model output in English. Preserved unchanged for comparison.</p>
+            <p class="model-note" id="preview-note" data-i18n="previewLanguageNote">App in English. Any manual changes for this preview are documented in the review.</p>
             <iframe
               id="result-frame"
               title="Selected model output (English)"
