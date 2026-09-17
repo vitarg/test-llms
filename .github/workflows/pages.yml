@@ -28,12 +28,17 @@ jobs:
           node-version: 24
           cache: npm
           cache-dependency-path: |
+            test-astra/package-lock.json
             test-claude/package-lock.json
             test-fable/package-lock.json
             test-gemma4/package-lock.json
             test-gpt/package-lock.json
             test-ornith/package-lock.json
             test-qwen27b/package-lock.json
+
+      - name: Install Astra app dependencies
+        run: npm ci
+        working-directory: test-astra
 
       - name: Install Claude app dependencies
         run: npm ci

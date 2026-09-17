@@ -7,6 +7,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const outputDir = resolve(root, "pages-dist");
 
 const projects = [
+  { dir: "test-astra", target: "astra" },
   { dir: "test-claude", target: "claude" },
   { dir: "test-fable", target: "fable" },
   { dir: "test-gemma4", target: "gemma4" },

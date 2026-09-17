@@ -239,5 +239,47 @@
       "manualEditsKnown": true,
       "readmeProvided": false
     }
+  },
+  {
+    "id": "astra",
+    "label": "GPT 6 Astra",
+    "modelName": "gpt 6 astra Ultra",
+    "modelType": "frontier",
+    "appUrl": "./apps/astra/",
+    "totalTime": "5 minutes 58 seconds (1.5x speed)",
+    "timeSeconds": 358,
+    "buildStatus": "pass",
+    "scores": {
+      "promptAdherence": 5,
+      "domainLogic": 5,
+      "codeQuality": 4.5,
+      "ux": 4,
+      "ui": 5,
+      "mobile": 4,
+      "accessibility": 4.5,
+      "robustness": 4.5
+    },
+    "totalScore": 93,
+    "verdict": "ready",
+    "strengths": [
+      "Stores money as integer cents with bounded parsing, local calendar dates, and a filtered subtotal next to the all-time total.",
+      "Validates saved data at runtime, preserves unreadable storage instead of overwriting it, and reports save failures without losing input.",
+      "Ships a README with structure, tradeoffs, and improvements, plus native Node tests and a strict TypeScript build.",
+      "Labeled fields, descriptive delete buttons, and live status messages make the flow accessible."
+    ],
+    "criticalIssues": [],
+    "evidence": [
+      "Delete is immediate and has no undo or confirmation.",
+      "When saved data is invalid the app blocks all changes and asks the user to fix localStorage manually; there is no in-app reset.",
+      "Delete buttons are 32x32px, below the 44px touch target guideline.",
+      "Fonts load from Google Fonts, an external request in an app that promises data stays on the device.",
+      "Viewer added base: './' to vite.config.ts so the build works from a Pages subfolder; app code is unchanged."
+    ],
+    "notes": "Best result in the set: production-minded money handling, storage safety, and the most polished UI.",
+    "artifactCompleteness": {
+      "rawOutputAvailable": false,
+      "manualEditsKnown": true,
+      "readmeProvided": true
+    }
   }
 ]
