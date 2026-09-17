@@ -32,6 +32,7 @@ jobs:
             test-fable/package-lock.json
             test-gemma4/package-lock.json
             test-gpt/package-lock.json
+            test-ornith/package-lock.json
             test-qwen27b/package-lock.json
 
       - name: Install Claude app dependencies
@@ -49,6 +50,10 @@ jobs:
       - name: Install GPT app dependencies
         run: npm ci
         working-directory: test-gpt
+
+      - name: Install Ornith app dependencies
+        run: npm ci
+        working-directory: test-ornith
 
       - name: Install Qwen app dependencies
         run: npm ci

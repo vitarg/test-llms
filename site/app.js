@@ -17,7 +17,7 @@ const translations = {
     eyebrow: "Fixed prompt benchmark",
     headline: "Local vs frontier model results",
     intro:
-      "One React + TypeScript expense tracker prompt, five frozen model outputs, scored by external product and engineering review.",
+      "One React + TypeScript expense tracker prompt, six frozen model outputs, scored by external product and engineering review.",
     methodologyEyebrow: "Methodology",
     methodologyTitle: "How to read this benchmark",
     methodologyOne: "All models received the same fixed prompt.",
@@ -90,7 +90,7 @@ const translations = {
     eyebrow: "Benchmark фиксированного промпта",
     headline: "Локальные модели против frontier-моделей",
     intro:
-      "Один промпт React + TypeScript expense tracker, пять замороженных результатов моделей и внешняя продуктово-инженерная оценка.",
+      "Один промпт React + TypeScript expense tracker, шесть замороженных результатов моделей и внешняя продуктово-инженерная оценка.",
     methodologyEyebrow: "Методология",
     methodologyTitle: "Как читать этот benchmark",
     methodologyOne: "Все модели получили один и тот же фиксированный промпт.",

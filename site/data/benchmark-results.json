@@ -196,5 +196,46 @@
       "manualEditsKnown": true,
       "readmeProvided": false
     }
+  },
+  {
+    "id": "ornith",
+    "label": "Ornith 1.0",
+    "modelName": "Ornith 1.0 35B",
+    "modelType": "local",
+    "appUrl": "./apps/ornith/",
+    "totalTime": "1 minute 50 seconds",
+    "timeSeconds": 110,
+    "buildStatus": "pass",
+    "scores": {
+      "promptAdherence": 3.5,
+      "domainLogic": 3.5,
+      "codeQuality": 2.5,
+      "ux": 2.5,
+      "ui": 2.5,
+      "mobile": 3,
+      "accessibility": 2,
+      "robustness": 2.5
+    },
+    "totalScore": 58,
+    "verdict": "partial",
+    "strengths": [
+      "Fastest result in the set and covers add, delete, filter, total, and persistence.",
+      "Rejects empty descriptions, zero, and negative amounts.",
+      "Layout stays within a 390px viewport without horizontal overflow."
+    ],
+    "criticalIssues": [],
+    "evidence": [
+      "Storage logic is duplicated: utils/storage.ts and useLocalStorage both read the same key, and filterByCategory and useFilteredExpenses are never used.",
+      "Output shipped only src/; the viewer added the Vite scaffold and disabled noUnusedLocals because of unused React and saveExpenses imports.",
+      "Valid non-array JSON in localStorage crashes the app to a blank screen.",
+      "Invalid submits are silently ignored, and an empty category filter says \"No expenses yet.\"",
+      "Inputs rely on placeholders instead of labels, and the delete button is named \"x\" with a 7x16px target."
+    ],
+    "notes": "Fastest local output with correct core behavior, but duplicated storage code and thin UX keep it below Qwen.",
+    "artifactCompleteness": {
+      "rawOutputAvailable": false,
+      "manualEditsKnown": true,
+      "readmeProvided": false
+    }
   }
 ]

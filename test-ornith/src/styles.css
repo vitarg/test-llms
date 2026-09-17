@@ -1,0 +1,35 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: system-ui, sans-serif; background: #f4f4f5; color: #18181b; }
+.app { max-width: 640px; margin: 2rem auto; padding: 1rem; }
+h1 { margin-bottom: 1rem; }
+h3, h4 { margin-bottom: 0.5rem; }
+
+.expense-form { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.expense-form input, .expense-form select, .expense-form button {
+  padding: 0.5rem 0.75rem; border: 1px solid #d4d4d8; border-radius: 6px;
+  font-size: 0.9rem;
+}
+.expense-form button { background: #2563eb; color: #fff; border: none; cursor: pointer; }
+.expense-form button:hover { background: #1d4ed8; }
+
+.category-filter { display: flex; gap: 0.25rem; flex-wrap: wrap; margin-bottom: 1rem; }
+.category-filter button {
+  padding: 0.35rem 0.75rem; border: 1px solid #d4d4d8; border-radius: 999px;
+  background: #fff; cursor: pointer; font-size: 0.85rem;
+}
+.category-filter button.active { background: #2563eb; color: #fff; border-color: #2563eb; }
+
+.summary { background: #fff; border: 1px solid #e4e4e7; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+.summary ul { list-style: none; display: flex; gap: 1.5rem; flex-wrap: wrap; }
+.summary li { display: flex; gap: 0.5rem; }
+.cat-label { font-weight: 600; }
+
+.expense-list { list-style: none; }
+.expense-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.6rem 0; border-bottom: 1px solid #e4e4e7; gap: 0.5rem;
+}
+.expense-item:last-child { border-bottom: none; }
+.expense-amount { font-weight: 600; min-width: 60px; text-align: right; }
+.delete-btn { background: none; border: none; cursor: pointer; color: #ef4444; font-weight: bold; }
+.empty { color: #71717a; font-style: italic; }

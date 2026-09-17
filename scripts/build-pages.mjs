@@ -11,6 +11,7 @@ const projects = [
   { dir: "test-fable", target: "fable" },
   { dir: "test-gemma4", target: "gemma4" },
   { dir: "test-gpt", target: "gpt" },
+  { dir: "test-ornith", target: "ornith" },
   { dir: "test-qwen27b", target: "qwen27b" },
 ];
 
