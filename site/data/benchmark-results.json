@@ -484,5 +484,75 @@
       }
     },
     "previewNote": "Manually repaired preview: connected React, configured relative asset paths for GitHub Pages, and isolated storage from Qwen. The 72/100 quality score includes this interface; the critical-bug verdict records the original launch failure, not the current preview."
+  },
+  {
+    "id": "qwen35b",
+    "label": "Qwen 35B-A3B",
+    "modelName": "Qwen3.6 35B-A3B Q4_K_XL",
+    "modelType": "local",
+    "appUrl": "./apps/qwen35b/",
+    "totalTime": "4 minutes 24 seconds",
+    "timeSeconds": 264,
+    "buildStatus": "pass",
+    "scores": {
+      "promptAdherence": 4,
+      "domainLogic": 4,
+      "codeQuality": 3.5,
+      "ux": 3.5,
+      "ui": 3.5,
+      "mobile": 3,
+      "accessibility": 2,
+      "robustness": 2
+    },
+    "totalScore": 71,
+    "verdict": "usable_with_fixes",
+    "strengths": [
+      "The original submission launches without repair and passes a build that includes strict TypeScript checking.",
+      "Implements all five requested features with a single expense hook, separate storage utilities, and small components. The supplied response excerpt explains tradeoffs and future improvements.",
+      "Browser checks confirm adding, filtering, totals, persistence after reload, and deletion. A category breakdown adds a useful overview beyond the requested total.",
+      "The desktop interface is tidy and the form fits a 390px viewport. Native validation explains why a zero amount cannot be submitted."
+    ],
+    "criticalIssues": [],
+    "evidence": [
+      "Browser checks: $12.50 in Food and $25.00 in Entertainment produced $37.50 overall, with both categories in the breakdown. Filtering Food showed one expense and $12.50; reload retained both records, and deletion restored an empty state that persisted after another reload.",
+      "UX: the total and category breakdown both follow the filter, without a separate all-time total. The empty state only says No expenses found, descriptions are truncated on narrow screens, and deletion has no undo or confirmation.",
+      "Mobile: no horizontal overflow at 390px. At a 320px viewport with a 305px content area, document width reaches 340px and the description input overflows the form. Delete buttons measure about 56 by 26px; other controls are about 35–36px tall.",
+      "Accessibility: the add form has no explicit field labels; the amount and category controls have no accessible names. The category filter is labeled, but every delete button is named only Delete, and there are no live status announcements.",
+      "Storage checks against the source utility: malformed JSON and non-array values return an empty array, but a record with amount as a string, category as a number, and date as null is accepted. ExpenseItem calls amount.toFixed(2), so this accepted record can crash rendering. Write failures are not caught, and the mount effect overwrites unreadable storage with an empty array.",
+      "Types and money handling: Category is just string despite a fixed category list; saved records are not checked for field types or a description. Amounts use parseFloat and floating-point sums without a finite upper bound. No test suite, lint script, or README was supplied; only the final-response excerpt is available.",
+      "Manual integration changes only: added base: ./ for Pages and changed expense-tracker-data to qwen35b-expense-tracker-data. The original key collides with Qwen 27B, whose incompatible string records this parser discards. No feature, layout, or validation fixes were applied.",
+      "Quality score: prompt 4/5, domain logic 4/5, code 3.5/5, UX 3.5/5, UI 3.5/5, mobile 3/5, accessibility 2/5, robustness 2/5; weighted total rounds from 70.5 to 71/100. Original launch succeeded; storage edge cases affect robustness separately from ordinary working scenarios."
+    ],
+    "notes": "Second-highest local quality score, close to Laguna (72/100), with no original launch blocker and about 3.3 times shorter generation time. Clear structure and a useful category summary; field accessibility and storage validation need work.",
+    "artifactCompleteness": {
+      "rawOutputAvailable": false,
+      "manualEditsKnown": true,
+      "readmeProvided": false
+    },
+    "previewNote": "Original app launches successfully. Preview integration only adds relative asset paths for Pages and an isolated storage key to avoid collisions with Qwen 27B; application behavior and layout are unchanged.",
+    "translations": {
+      "ru": {
+        "totalTime": "4 минуты 24 секунды",
+        "notes": "Второй балл за качество среди локальных моделей, близко к Laguna (72/100), без исходной ошибки запуска и с генерацией примерно в 3,3 раза быстрее. Понятная структура и полезная сводка по категориям; доступность полей и проверка хранилища требуют доработки.",
+        "strengths": [
+          "Исходное приложение запускается без исправлений и проходит сборку со строгой проверкой TypeScript.",
+          "Реализованы все пять запрошенных функций: единый хук расходов, отдельные функции хранения и небольшие компоненты. Предоставленный фрагмент ответа объясняет компромиссы и будущие улучшения.",
+          "В браузере проверены добавление, фильтрация, итоги, сохранение после перезагрузки и удаление. Разбивка по категориям дополняет запрошенную общую сумму полезной сводкой.",
+          "Настольный интерфейс аккуратен, форма помещается при ширине 390 пикселей. Встроенная проверка браузера объясняет, почему нельзя отправить нулевую сумму."
+        ],
+        "criticalIssues": [],
+        "evidence": [
+          "Проверка в браузере: 12,50 доллара в Food и 25,00 в Entertainment дали общий итог 37,50 и обе категории в сводке. Фильтр Food оставил один расход и 12,50; перезагрузка сохранила обе записи, а удаление вернуло пустое состояние, сохранившееся после повторной перезагрузки.",
+          "Удобство: итог и сводка по категориям зависят от фильтра, отдельной суммы всех расходов нет. Пустое состояние сообщает лишь «Расходы не найдены», описания обрезаются на узких экранах, удаление происходит без отмены или подтверждения.",
+          "Мобильная версия: при ширине 390 пикселей горизонтального переполнения нет. При окне 320 пикселей и области содержимого 305 пикселей ширина документа достигает 340, а поле описания выходит за границы формы. Кнопки удаления имеют размер около 56 × 26 пикселей, остальные элементы управления — высоту около 35–36 пикселей.",
+          "Доступность: у полей добавления нет явных подписей; сумма и категория не имеют доступных имён. Фильтр категорий подписан, но все кнопки удаления называются только Delete, а изменения состояния не объявляются вспомогательным технологиям.",
+          "Проверка исходной функции хранения: повреждённый JSON и значения, не являющиеся массивом, дают пустой массив, но запись с суммой-строкой, категорией-числом и датой null принимается. ExpenseItem вызывает amount.toFixed(2), поэтому такая принятая запись может сломать отображение. Ошибки записи не перехватываются; эффект при монтировании перезаписывает нечитаемые данные пустым массивом.",
+          "Типы и денежные суммы: Category определён как string, хотя список категорий фиксирован; у сохранённых записей не проверяются типы полей и наличие описания. Суммы используют parseFloat и сложение с плавающей точкой без конечной верхней границы. Тестов, команды линтера и README нет; доступен лишь фрагмент итогового ответа.",
+          "Только ручные изменения для интеграции: добавлено base: ./ для Pages, ключ expense-tracker-data заменён на qwen35b-expense-tracker-data. Исходный ключ совпадает с Qwen 27B, чьи несовместимые строковые записи этот парсер отбрасывает. Функции, вёрстка и валидация не исправлялись.",
+          "Оценка качества: промпт — 4/5, логика — 4/5, код — 3,5/5, удобство — 3,5/5, дизайн — 3,5/5, мобильная версия — 3/5, доступность — 2/5, надёжность — 2/5; взвешенный итог округляется с 70,5 до 71/100. Исходный запуск успешен; пограничные случаи хранилища учитываются в надёжности отдельно от работающих обычных сценариев."
+        ],
+        "previewNote": "Исходное приложение успешно запускается. Для предпросмотра добавлены только относительные пути ресурсов для Pages и отдельный ключ хранения для защиты от пересечения с Qwen 27B; поведение приложения и вёрстка сохранены."
+      }
+    }
   }
 ]

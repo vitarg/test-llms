@@ -15,6 +15,7 @@ const projects = [
   { dir: "test-laguna-2.1", target: "laguna" },
   { dir: "test-ornith", target: "ornith" },
   { dir: "test-qwen27b", target: "qwen27b" },
+  { dir: "test-Qwen3.6-35B-A3B/expense-tracker", target: "qwen35b" },
 ];
 
 function run(command, args, cwd) {

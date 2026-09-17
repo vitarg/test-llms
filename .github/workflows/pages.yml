@@ -36,6 +36,7 @@ jobs:
             test-laguna-2.1/package-lock.json
             test-ornith/package-lock.json
             test-qwen27b/package-lock.json
+            test-Qwen3.6-35B-A3B/expense-tracker/package-lock.json
 
       - name: Install Astra app dependencies
         run: npm ci
@@ -72,6 +73,10 @@ jobs:
       - name: Install Qwen app dependencies
         run: npm ci
         working-directory: test-qwen27b
+
+      - name: Install Qwen 35B app dependencies
+        run: npm ci
+        working-directory: test-Qwen3.6-35B-A3B/expense-tracker
 
       - name: Validate benchmark data
         run: node scripts/validate-benchmark-data.mjs

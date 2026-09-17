@@ -7,7 +7,7 @@ const dataPath = resolve(root, "site/data/benchmark-results.json");
 const raw = await readFile(dataPath, "utf8");
 const results = JSON.parse(raw);
 
-const expectedIds = new Set(["qwen27b", "claude", "fable", "gemma4", "gpt", "ornith", "astra", "laguna"]);
+const expectedIds = new Set(["qwen27b", "claude", "fable", "gemma4", "gpt", "ornith", "astra", "laguna", "qwen35b"]);
 const modelTypes = new Set(["local", "frontier"]);
 const buildStatuses = new Set(["pass", "fail"]);
 const verdicts = new Set([
