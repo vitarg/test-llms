@@ -199,7 +199,7 @@
       "Amount and category controls in the form lack visible labels or accessible names.",
       "Storage serializes each expense as a JSON string inside a JSON array, which is unnecessarily fragile."
     ],
-    "notes": "Best local result in this set, but less complete against the full prompt and weaker on accessibility.",
+    "notes": "Compact local result with a clean interface, but less complete against the full prompt and weaker on accessibility.",
     "artifactCompleteness": {
       "rawOutputAvailable": false,
       "manualEditsKnown": true,
@@ -208,7 +208,7 @@
     "translations": {
       "ru": {
         "totalTime": "18 минут",
-        "notes": "Лучший результат среди локальных моделей в этой выборке, но требования промпта выполнены менее полно и доступность проработана слабее.",
+        "notes": "Компактный результат локальной модели с аккуратным интерфейсом, но требования промпта выполнены менее полно и доступность проработана слабее.",
         "strengths": [
           "Аккуратный компактный интерфейс, который на мобильных устройствах работает лучше ряда результатов передовых моделей.",
           "Выполнены основные требования: добавление, удаление, фильтрация, подсчёт итогов и сохранение.",
@@ -421,37 +421,37 @@
     "timeSeconds": 874,
     "buildStatus": "pass",
     "scores": {
-      "promptAdherence": 3,
-      "domainLogic": 3,
-      "codeQuality": 3.5,
-      "ux": 0,
-      "ui": 0,
-      "mobile": 0,
-      "accessibility": 0,
-      "robustness": 1
+      "promptAdherence": 4,
+      "domainLogic": 4,
+      "codeQuality": 4,
+      "ux": 3,
+      "ui": 3.5,
+      "mobile": 2.5,
+      "accessibility": 3.5,
+      "robustness": 2
     },
-    "totalScore": 39,
+    "totalScore": 72,
     "verdict": "critical_bug",
     "strengths": [
-      "Includes the requested components, hooks, types, and utils structure, with a centralized expense hook and typed categories.",
-      "Source code includes add, delete, filter, filtered totals, date input, and localStorage persistence; form fields have labels and delete buttons have descriptive accessible names.",
-      "Build, ESLint, and the separate TypeScript check all pass.",
-      "The supplied final-response excerpt explains the file structure, tradeoffs, and possible improvements."
+      "Includes the requested folder structure, typed categories, shared formatters, and a centralized hook for expense state and derived totals.",
+      "Browser checks confirm adding expenses, category filtering, correct visible totals, persistence after reload, and deletion. Negative amounts are rejected by the input and zero amounts cannot be submitted.",
+      "The desktop interface has clear form labels, consistent cards, category badges, and descriptive accessible names for delete buttons.",
+      "Build, ESLint, and the separate TypeScript check pass. The supplied final-response excerpt explains structure, tradeoffs, and possible improvements."
     ],
     "criticalIssues": [
       "The original index.html did not import src/main.tsx and produced a blank page. The entry script was added manually for this preview; the original result keeps its critical-bug verdict."
     ],
     "evidence": [
-      "Before manual fixes, npm run build transformed only one module and emitted a 246-byte dist/index.html with an empty #root and no script or asset bundle. The original browser accessibility tree contained only the document title.",
-      "The 39/100 score assesses the original submission before manual fixes: source inspection informed prompt, logic, and code scores; UX, UI, mobile, and accessibility received zero because no interface rendered. The repaired preview has not been rescored.",
-      "npm run build runs Vite alone; npm run lint and npm run typecheck were also executed separately and passed. A successful build therefore does not establish that the application starts.",
-      "Source inspection: useLocalStorage still casts parsed JSON to T without validating its shape. Valid non-array JSON in its storage key can cause reduce/filter failures.",
-      "Source inspection: failed storage writes are swallowed while React state updates and the form clears, so unsaved changes would appear successful.",
-      "The original expense-tracker-data key collided with Qwen, which stores JSON strings rather than expense objects. The preview now uses laguna-expense-tracker-data to keep both apps independent on the same origin.",
-      "Source inspection: today() uses a UTC date and formatDate() parses date-only values into timestamps; these can shift calendar dates across time zones. Amounts are summed as floating-point numbers.",
-      "No README or automated tests were supplied by the model. Only the final-response excerpt is available, not the full raw output. The original artifact is preserved in commit 0fbc5d5; the published preview adds the entry script, base: ./, and a unique storage key manually."
+      "Original delivery blocker: index.html omitted src/main.tsx. The initial build emitted only a 246-byte blank HTML page despite passing build, lint, and type checks. This failure remains recorded, but does not zero unrelated quality criteria.",
+      "Revised quality score: prompt 4/5, domain logic 4/5, code 4/5, UX 3/5, UI 3.5/5, mobile 2.5/5, accessibility 3.5/5, robustness 2/5; weighted total 72/100. The previous 39/100 assessment counted the launch failure again by zeroing four interface criteria.",
+      "Browser checks: expenses of $12.50 and $25.00 produced $37.50 overall and $12.50 with the Food filter; reload retained a saved expense, and deletion restored the empty state.",
+      "UX: a zero amount is silently rejected without an explanation; the empty state only says No expenses found; deletion is immediate without undo.",
+      "At a 390px browser viewport (375px content area), the form fits but the Expenses heading crowds the filter. An Entertainment / Cinema tickets row has 303px of content in a 295px row. Delete buttons measure about 24 by 26px; muted text and button contrast are weak.",
+      "Source inspection: parsed storage is cast to T without shape validation, failed writes are swallowed, and the form still clears. There are no automated tests; these limit robustness independently of the launch defect.",
+      "Source inspection: UTC-based today() and timestamp-based date formatting can shift calendar dates across time zones. Money is summed with floating-point arithmetic.",
+      "Manual integration changes are limited to the missing entry script, base: ./ for Pages, and laguna-expense-tracker-data to avoid incompatible Qwen storage. The original submission remains in commit 0fbc5d5; the model supplied no README and only a final-response excerpt is available."
     ],
-    "notes": "Original submission: 39/100 due to a missing entry script. The published preview now runs after documented manual integration fixes; the original score is unchanged.",
+    "notes": "Best local quality score after documented integration fixes: clear code and a tidy interface. The original submission still required a manual launch repair, recorded separately as a delivery blocker.",
     "artifactCompleteness": {
       "rawOutputAvailable": false,
       "manualEditsKnown": true,
@@ -460,29 +460,29 @@
     "translations": {
       "ru": {
         "totalTime": "14 минут 34 секунды",
-        "notes": "Исходный результат: 39/100 из-за отсутствующего подключения точки входа. Опубликованная версия запускается после описанных ручных исправлений; исходная оценка сохранена.",
+        "notes": "Лучший балл за качество среди локальных моделей после описанных исправлений для запуска: понятный код и аккуратный интерфейс. Исходный результат требовал ручного исправления запуска; это отдельно отмечено как дефект поставки.",
         "strengths": [
-          "Есть запрошенная структура components, hooks, types и utils, единый хук расходов и типизированные категории.",
-          "В коде реализованы добавление, удаление, фильтрация, итог по фильтру, ввод даты и сохранение в localStorage; поля имеют подписи, а кнопки удаления — понятные имена для вспомогательных технологий.",
-          "Сборка, ESLint и отдельная проверка TypeScript проходят успешно.",
-          "Предоставленный фрагмент итогового ответа объясняет структуру файлов, компромиссы и возможные улучшения."
+          "Есть запрошенная структура папок, типизированные категории, общие функции форматирования и единый хук состояния расходов с вычислением итогов.",
+          "В браузере проверены добавление, фильтрация по категории, корректный итог видимых расходов, сохранение после перезагрузки и удаление. Поле не принимает отрицательные суммы, а нулевые нельзя отправить.",
+          "Настольный интерфейс имеет явные подписи полей, единообразные карточки, метки категорий и понятные имена кнопок удаления для вспомогательных технологий.",
+          "Сборка, ESLint и отдельная проверка TypeScript проходят. Предоставленный фрагмент итогового ответа объясняет структуру, компромиссы и возможные улучшения."
         ],
         "criticalIssues": [
           "В исходном index.html не был подключён src/main.tsx, поэтому отображалась пустая страница. Для предпросмотра подключение добавлено вручную; вердикт «Критическая ошибка» сохранён для исходного результата."
         ],
         "evidence": [
-          "До ручных исправлений npm run build обрабатывал один модуль и создавал dist/index.html размером 246 байт: пустой #root, без скриптов и файлов приложения. В дереве доступности исходной версии присутствовал только заголовок документа.",
-          "Оценка 39/100 относится к исходному результату до ручных исправлений: баллы за промпт, логику и код учитывают чтение исходников; удобство, дизайн, мобильная версия и доступность получили ноль, поскольку интерфейс не появлялся. Версия для предпросмотра повторно не оценивалась.",
-          "npm run build запускает только Vite; npm run lint и npm run typecheck выполнены отдельно и также прошли. Успешная сборка здесь не подтверждает запуск приложения.",
-          "По коду: useLocalStorage по-прежнему приводит разобранный JSON к типу T без проверки структуры. Корректный JSON, не являющийся массивом, в его ключе хранилища может приводить к ошибкам reduce/filter.",
-          "По коду: ошибки записи в хранилище подавляются, хотя состояние React обновляется и форма очищается; несохранённые изменения выглядели бы успешными.",
-          "Исходный ключ expense-tracker-data совпадал с ключом Qwen, который хранит строки JSON вместо объектов расходов. В опубликованной версии используется laguna-expense-tracker-data, чтобы приложения не мешали друг другу на одном домене.",
-          "По коду: today() использует дату UTC, а formatDate() превращает календарную дату в момент времени; в разных часовых поясах это может сдвигать день. Суммы складываются как числа с плавающей точкой.",
-          "Модель не предоставила README и автоматические тесты. Доступен только фрагмент итогового ответа, а не полный исходный вывод. Исходный артефакт сохранён в коммите 0fbc5d5; для публикации вручную добавлены подключение точки входа, base: ./ и отдельный ключ хранилища."
+          "Дефект исходной поставки: в index.html отсутствовало подключение src/main.tsx. Первоначальная сборка создавала лишь пустой HTML размером 246 байт, хотя сборка, линтер и проверка типов проходили. Ошибка сохранена в замечаниях, но не обнуляет независимые критерии качества.",
+          "Пересмотренная оценка качества: промпт — 4/5, логика — 4/5, код — 4/5, удобство — 3/5, дизайн — 3,5/5, мобильная версия — 2,5/5, доступность — 3,5/5, надёжность — 2/5; взвешенный итог — 72/100. Прежние 39/100 повторно учитывали сбой запуска, обнуляя четыре критерия интерфейса.",
+          "Проверка в браузере: расходы 12,50 и 25,00 доллара дали общий итог 37,50 и 12,50 при фильтре Food; перезагрузка сохранила добавленный расход, а удаление вернуло пустое состояние.",
+          "Удобство: нулевая сумма отклоняется без объяснения; пустое состояние сообщает лишь «Расходы не найдены»; удаление происходит сразу, без отмены.",
+          "При ширине окна 390 пикселей и области содержимого 375 пикселей форма помещается, но заголовок Expenses теснится рядом с фильтром. Строка Entertainment / Cinema tickets содержит 303 пикселя содержимого при ширине 295. Кнопки удаления имеют размер около 24 × 26 пикселей; контраст приглушённого текста и основной кнопки слабый.",
+          "По коду: данные хранилища приводятся к типу T без проверки структуры, ошибки записи подавляются, а форма всё равно очищается. Автоматических тестов нет; это снижает надёжность независимо от ошибки запуска.",
+          "По коду: today() на основе UTC и форматирование даты как момента времени могут сдвигать календарный день между часовыми поясами. Деньги складываются с плавающей точкой.",
+          "Ручные изменения для интеграции ограничены подключением точки входа, base: ./ для Pages и ключом laguna-expense-tracker-data для защиты от несовместимых данных Qwen. Исходный результат сохранён в коммите 0fbc5d5; модель не предоставила README, доступен лишь фрагмент итогового ответа."
         ],
-        "previewNote": "Версия с ручными исправлениями: подключена точка входа React, настроены относительные пути для GitHub Pages и отделено хранилище от Qwen. Оценка 39/100 и вердикт «Критическая ошибка» по-прежнему относятся к исходному результату с пустой страницей."
+        "previewNote": "Версия с ручными исправлениями: подключён React, настроены относительные пути для GitHub Pages и отделено хранилище от Qwen. Оценка качества 72/100 учитывает этот интерфейс; вердикт «Критическая ошибка» фиксирует сбой запуска исходного результата, а не текущей версии."
       }
     },
-    "previewNote": "Manually repaired preview: connected the React entry point, configured relative asset paths for GitHub Pages, and isolated storage from Qwen. The 39/100 score and critical-bug verdict still describe the original blank-page submission."
+    "previewNote": "Manually repaired preview: connected React, configured relative asset paths for GitHub Pages, and isolated storage from Qwen. The 72/100 quality score includes this interface; the critical-bug verdict records the original launch failure, not the current preview."
   }
 ]
