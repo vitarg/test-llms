@@ -33,6 +33,7 @@ jobs:
             test-fable/package-lock.json
             test-gemma4/package-lock.json
             test-gpt/package-lock.json
+            test-laguna-2.1/package-lock.json
             test-ornith/package-lock.json
             test-qwen27b/package-lock.json
 
@@ -59,6 +60,14 @@ jobs:
       - name: Install Ornith app dependencies
         run: npm ci
         working-directory: test-ornith
+
+      - name: Install Laguna app dependencies
+        run: npm ci
+        working-directory: test-laguna-2.1
+
+      - name: Check Laguna source
+        run: npm run lint && npm run typecheck
+        working-directory: test-laguna-2.1
 
       - name: Install Qwen app dependencies
         run: npm ci
