@@ -34,6 +34,7 @@ jobs:
             test-gemma4/package-lock.json
             test-gpt/package-lock.json
             test-laguna-2.1/package-lock.json
+            test-MiMo-V2.6-Pro/package-lock.json
             test-ornith/package-lock.json
             test-qwen27b/package-lock.json
             test-Qwen3.6-35B-A3B/expense-tracker/package-lock.json
@@ -77,6 +78,14 @@ jobs:
       - name: Install Qwen 35B app dependencies
         run: npm ci
         working-directory: test-Qwen3.6-35B-A3B/expense-tracker
+
+      - name: Install MiMo app dependencies
+        run: npm ci
+        working-directory: test-MiMo-V2.6-Pro
+
+      - name: Check MiMo source
+        run: npm run typecheck
+        working-directory: test-MiMo-V2.6-Pro
 
       - name: Validate benchmark data
         run: node scripts/validate-benchmark-data.mjs

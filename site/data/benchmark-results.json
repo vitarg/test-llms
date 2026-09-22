@@ -554,5 +554,75 @@
         "previewNote": "Исходное приложение успешно запускается. Для предпросмотра добавлены только относительные пути ресурсов для Pages и отдельный ключ хранения для защиты от пересечения с Qwen 27B; поведение приложения и вёрстка сохранены."
       }
     }
+  },
+  {
+    "id": "mimo",
+    "label": "MiMo",
+    "modelName": "MiMo-V2.6-Pro high (OpenRouter)",
+    "modelType": "frontier",
+    "appUrl": "./apps/mimo/",
+    "totalTime": "About 9 minutes 34 seconds total",
+    "timeSeconds": 574,
+    "buildStatus": "pass",
+    "scores": {
+      "promptAdherence": 4.5,
+      "domainLogic": 4,
+      "codeQuality": 4.5,
+      "ux": 4,
+      "ui": 3.5,
+      "mobile": 4,
+      "accessibility": 3.5,
+      "robustness": 3
+    },
+    "totalScore": 82,
+    "verdict": "usable_with_fixes",
+    "strengths": [
+      "All five requested features work; the original submission launches and passes build and TypeScript checks.",
+      "Small components, typed categories, shared helpers, and runtime validation of stored record types. The supplied final-response screenshot explains structure, tradeoffs, and future improvements.",
+      "Keeps the overall total visible alongside the filtered total, distinguishes empty states, and provides field labels, descriptive delete names, pressed filter states, and live total announcements.",
+      "The interface fits 320px and 390px viewports without horizontal page overflow in the checked scenarios."
+    ],
+    "criticalIssues": [],
+    "evidence": [
+      "Browser checks: $12.50 in Food and $25.00 in Entertainment produced $37.50 overall and $12.50 with Food selected. Reload retained both expenses; deletion restored the empty state, which persisted after reload.",
+      "Browser-reproduced amount bug: 0.001 passes validation and is saved as $0.00. noValidate disables native min and step checks, while the positive-number check runs before rounding.",
+      "Source inspection: the required date has no manual validation despite noValidate. Storage validation checks field types but accepts negative amounts and empty dates.",
+      "Storage utility checks: malformed JSON returns the fallback and wrong field types are rejected by the expense guard. Write exceptions are swallowed without notifying the user; the form clears even when persistence fails.",
+      "UX and accessibility limitations: deletion has no undo or confirmation, form errors are not announced as alerts, and delete buttons are about 32px tall. The visual design is tidy but basic.",
+      "Timing combines about 4 minutes of unsolicited planning reported by the user with the 5 minutes 34 seconds implementation time shown in the screenshot. The displayed $0.05 is not treated as a verified total cost because its coverage is unclear.",
+      "Quality score: prompt 4.5/5, domain logic 4/5, code 4.5/5, UX 4/5, UI 3.5/5, mobile 4/5, accessibility 3.5/5, robustness 3/5; weighted total rounds from 81.5 to 82/100. The final-response screenshot supports the increase from the initial 80/100 assessment.",
+      "Preview integration only: added base: ./ and an isolated mimo-expense-tracker-data storage key, because the original key collides with Claude. Original submission is preserved in commit fb6030e. No functional fixes were applied; only a final-response screenshot, not the full generation transcript, is available."
+    ],
+    "notes": "Strong implementation with clear totals and good mobile fit. Amount validation and silent storage failures need fixes. Total time includes an unsolicited planning stage.",
+    "artifactCompleteness": {
+      "rawOutputAvailable": false,
+      "manualEditsKnown": true,
+      "readmeProvided": false
+    },
+    "previewNote": "Original app launches successfully. Preview integration adds relative asset paths for Pages and isolates storage from Claude; application behavior and layout are unchanged.",
+    "translations": {
+      "ru": {
+        "totalTime": "Всего около 9 минут 34 секунд",
+        "notes": "Сильная реализация с понятными итогами и хорошей мобильной вёрсткой. Нужны исправления проверки суммы и скрытых ошибок сохранения. Время включает незапрошенный этап планирования.",
+        "strengths": [
+          "Все пять запрошенных функций работают; исходное приложение запускается и проходит сборку и проверку TypeScript.",
+          "Небольшие компоненты, типизированные категории, общие утилиты и проверка типов сохранённых записей. На предоставленном скриншоте итогового ответа объяснены структура, компромиссы и будущие улучшения.",
+          "Общий итог остаётся видимым рядом с отфильтрованным; различаются пустые состояния. Есть подписи полей, содержательные имена удаления, состояние выбранного фильтра и объявления итогов для вспомогательных технологий.",
+          "В проверенных сценариях интерфейс помещается при ширине 320 и 390 пикселей без горизонтального переполнения страницы."
+        ],
+        "criticalIssues": [],
+        "evidence": [
+          "Проверка в браузере: 12,50 доллара в Food и 25,00 в Entertainment дали общий итог 37,50 и 12,50 при фильтре Food. Перезагрузка сохранила оба расхода; удаление вернуло пустое состояние, сохранившееся после перезагрузки.",
+          "Воспроизведённая в браузере ошибка суммы: значение 0.001 проходит проверку и сохраняется как 0,00 доллара. noValidate отключает нативные ограничения min и step, а проверка положительного числа выполняется до округления.",
+          "По коду: обязательная дата не проверяется вручную при включённом noValidate. Проверка хранилища контролирует типы полей, но принимает отрицательные суммы и пустые даты.",
+          "Проверки утилит: повреждённый JSON возвращает резервное значение, а неверные типы полей отклоняются проверкой расхода. Исключения записи подавляются без уведомления пользователя; форма очищается даже при ошибке сохранения.",
+          "Ограничения удобства и доступности: удаление без отмены или подтверждения, ошибки формы не объявляются как предупреждения, высота кнопок удаления около 32 пикселей. Оформление аккуратное, но простое.",
+          "Время складывается из примерно 4 минут незапрошенного планирования со слов пользователя и 5 минут 34 секунд реализации на скриншоте. Показанные 0,05 доллара не считаются подтверждённой полной стоимостью: неизвестно, какие этапы охватывает сумма.",
+          "Оценка качества: промпт — 4,5/5, логика — 4/5, код — 4,5/5, удобство — 4/5, дизайн — 3,5/5, мобильная версия — 4/5, доступность — 3,5/5, надёжность — 3/5; взвешенный итог округляется с 81,5 до 82/100. Скриншот итогового ответа обосновывает повышение первоначальной оценки 80/100.",
+          "Только интеграция предпросмотра: добавлено base: ./ и отдельный ключ mimo-expense-tracker-data, поскольку исходный ключ совпадает с Claude. Исходная работа сохранена в коммите fb6030e. Функциональные ошибки не исправлялись; доступен скриншот итогового ответа, но не полный журнал генерации."
+        ],
+        "previewNote": "Исходное приложение успешно запускается. Для предпросмотра добавлены относительные пути ресурсов Pages и отдельное хранилище от Claude; поведение приложения и вёрстка сохранены."
+      }
+    }
   }
 ]

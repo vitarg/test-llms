@@ -3,7 +3,7 @@ import { isExpense, type Expense, type NewExpense } from '../types/expense';
 import { calculateTotal } from '../utils/calculate';
 import { loadFromStorage, saveToStorage } from '../utils/storage';
 
-const STORAGE_KEY = 'expense-tracker:expenses';
+const STORAGE_KEY = 'mimo-expense-tracker-data';
 
 function loadExpenses(): Expense[] {
   const stored = loadFromStorage<unknown[]>(STORAGE_KEY, []);
