@@ -21,3 +21,9 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Impeccable
+.github/agents/
+.github/hooks/
+.github/skills/
+.opencode/

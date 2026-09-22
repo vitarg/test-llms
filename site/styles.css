@@ -12,6 +12,12 @@
   --warning: #8b5a12;
   --info: #245f8f;
   --shadow: 0 16px 42px rgba(23, 32, 47, 0.1);
+  scrollbar-color: var(--line) var(--bg);
+}
+
+::selection {
+  background: rgba(23, 107, 87, 0.18);
+  color: var(--text);
 }
 
 * {
@@ -24,6 +30,7 @@ body {
   min-height: 100vh;
   color: var(--text);
   background: var(--bg);
+  caret-color: var(--accent);
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
@@ -50,7 +57,7 @@ button {
   display: flex;
   min-height: calc(100vh - 48px);
   flex-direction: column;
-  gap: 18px;
+  gap: 28px;
 }
 
 .topbar,
@@ -62,32 +69,25 @@ button {
 }
 
 .topbar {
-  padding: 18px 0 4px;
+  padding: 28px 0 4px;
 }
 
 .topbar > div:first-child {
   max-width: 860px;
 }
 
-.eyebrow {
-  margin: 0 0 6px;
-  color: var(--accent-strong);
-  font-size: 0.74rem;
-  font-weight: 800;
-  letter-spacing: 0;
-  text-transform: uppercase;
-}
-
 h1,
 h2,
 h3 {
   margin: 0;
-  letter-spacing: 0;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
 }
 
 h1 {
   font-size: clamp(2.1rem, 5vw, 4.8rem);
-  line-height: 0.98;
+  line-height: 1;
+  letter-spacing: -0.035em;
 }
 
 h2 {
@@ -100,11 +100,12 @@ h3 {
 }
 
 .intro {
-  max-width: 760px;
-  margin: 14px 0 0;
+  max-width: 70ch;
+  margin: 12px 0 0;
   color: var(--muted);
   font-size: 1.02rem;
   line-height: 1.55;
+  text-wrap: pretty;
 }
 
 .language-switcher,
@@ -125,7 +126,7 @@ h3 {
   border-radius: 6px;
   color: var(--muted);
   background: transparent;
-  font-weight: 750;
+  font-weight: 700;
   white-space: nowrap;
 }
 
@@ -139,11 +140,15 @@ h3 {
 }
 
 .language-button:hover,
+.filter-button:hover {
+  color: var(--text);
+}
+
 .language-button:focus-visible,
-.filter-button:hover,
 .filter-button:focus-visible {
   color: var(--text);
-  outline: 2px solid transparent;
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .language-button.is-active,
@@ -171,8 +176,8 @@ h3 {
 .methodology {
   display: grid;
   grid-template-columns: minmax(240px, 0.34fr) minmax(0, 1fr);
-  gap: 24px;
-  padding: 18px;
+  gap: 16px 24px;
+  padding: 22px 18px 18px;
 }
 
 .methodology ul {
@@ -200,6 +205,47 @@ h3 {
   border-radius: 8px;
   background: var(--surface);
   box-shadow: 0 8px 26px rgba(23, 32, 47, 0.06);
+  animation: rise 520ms cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.summary-card:nth-child(1) strong {
+  color: var(--accent-strong);
+  font-size: clamp(1.4rem, 2.2vw, 2.1rem);
+}
+
+.summary-card:nth-child(2) {
+  animation-delay: 70ms;
+}
+
+.summary-card:nth-child(3) {
+  animation-delay: 140ms;
+}
+
+.summary-card:nth-child(4) {
+  animation-delay: 210ms;
+}
+
+.summary-card:nth-child(5) {
+  animation-delay: 280ms;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .summary-card {
+    animation: none;
+  }
 }
 
 .summary-card span,
@@ -209,8 +255,9 @@ h3 {
 
 .summary-card span {
   font-size: 0.82rem;
-  font-weight: 800;
+  font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .summary-card strong {
@@ -249,18 +296,25 @@ td {
   border-bottom: 1px solid var(--line);
   text-align: left;
   vertical-align: top;
+  font-variant-numeric: tabular-nums;
 }
 
 th {
   color: var(--muted);
   font-size: 0.76rem;
-  font-weight: 850;
+  font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 0.04em;
   white-space: nowrap;
 }
 
 th[role="button"] {
   cursor: pointer;
+}
+
+th[role="button"]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
 }
 
 tbody tr {
@@ -270,10 +324,13 @@ tbody tr {
 }
 
 tbody tr:hover,
-tbody tr:focus-visible,
 tbody tr.is-selected {
   background: #f1f7f5;
-  outline: 0;
+}
+
+tbody tr:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
 }
 
 td strong,
@@ -289,7 +346,7 @@ td small {
 
 .score-cell {
   color: var(--accent-strong);
-  font-weight: 900;
+  font-weight: 800;
   white-space: nowrap;
 }
 
@@ -302,7 +359,7 @@ td small {
   background: var(--surface-alt);
   color: var(--text);
   font-size: 0.82rem;
-  font-weight: 850;
+  font-weight: 700;
   white-space: nowrap;
 }
 
@@ -344,16 +401,15 @@ td small {
 
 .verdict-strip {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
-  margin: 16px 0;
+  margin: 14px 0;
 }
 
 .verdict-strip div {
   display: grid;
   gap: 4px;
   padding: 12px;
-  border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--surface-alt);
 }
@@ -361,8 +417,9 @@ td small {
 .verdict-strip span {
   color: var(--muted);
   font-size: 0.76rem;
-  font-weight: 850;
+  font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
 
 .verdict-strip strong {
@@ -370,18 +427,19 @@ td small {
 }
 
 .model-note {
-  margin: 0 0 16px;
+  max-width: 70ch;
+  margin: 0 0 14px;
   color: var(--muted);
   line-height: 1.5;
+  text-wrap: pretty;
 }
 
 .score-bars {
   display: grid;
   gap: 9px;
   padding: 12px;
-  border: 1px solid var(--line);
   border-radius: 8px;
-  background: #fbfcfd;
+  background: var(--surface-alt);
 }
 
 .score-row {
@@ -417,6 +475,7 @@ td small {
   color: var(--text);
   font-size: 0.86rem;
   text-align: right;
+  font-variant-numeric: tabular-nums;
 }
 
 .evidence-columns {
@@ -463,7 +522,8 @@ td small {
 
 .completeness-list dd {
   margin: 0;
-  font-weight: 850;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }
 
 .preview-panel,
@@ -493,15 +553,19 @@ td small {
   border-radius: 6px;
   color: var(--accent-strong);
   background: #ffffff;
-  font-weight: 800;
+  font-weight: 700;
   text-decoration: none;
+  text-underline-offset: 3px;
   white-space: nowrap;
 }
 
-.open-link:hover,
-.open-link:focus-visible {
+.open-link:hover {
   border-color: var(--accent);
-  outline: 2px solid transparent;
+}
+
+.open-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 iframe {
@@ -532,6 +596,10 @@ pre {
 
   .detail-grid {
     grid-template-columns: 1fr;
+  }
+
+  .verdict-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   iframe {

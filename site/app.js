@@ -17,7 +17,7 @@ const elements = {
   sortableHeaders: document.querySelectorAll("[data-sort]"),
   summaryCards: document.querySelector("#summary-cards"),
   resultsTable: document.querySelector("#results-table"),
-  activeModelType: document.querySelector("#active-model-type"),
+  activeType: document.querySelector("#active-type"),
   activeTitle: document.querySelector("#active-title"),
   activeScore: document.querySelector("#active-score"),
   activeVerdict: document.querySelector("#active-verdict"),
@@ -348,7 +348,7 @@ function setActiveResult(modelId, syncUrl = false) {
   state.selectedId = result.id;
   elements.modelPanels.forEach((panel) => { panel.hidden = false; });
 
-  elements.activeModelType.textContent = formatType(result.modelType);
+  elements.activeType.textContent = formatType(result.modelType);
   elements.activeTitle.textContent = `${result.label} - ${result.modelName}`;
   elements.activeScore.textContent = `${result.totalScore}/100`;
   elements.activeVerdict.textContent = formatVerdict(result.verdict);
