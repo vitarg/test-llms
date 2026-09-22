@@ -39,59 +39,36 @@ jobs:
             test-qwen27b/package-lock.json
             test-Qwen3.6-35B-A3B/expense-tracker/package-lock.json
 
-      - name: Install Astra app dependencies
-        run: npm ci
-        working-directory: test-astra
-
-      - name: Install Claude app dependencies
-        run: npm ci
-        working-directory: test-claude
-
-      - name: Install Fable app dependencies
-        run: npm ci
-        working-directory: test-fable
-
-      - name: Install Gemma 4 app dependencies
-        run: npm ci
-        working-directory: test-gemma4
-
-      - name: Install GPT app dependencies
-        run: npm ci
-        working-directory: test-gpt
-
-      - name: Install Ornith app dependencies
-        run: npm ci
-        working-directory: test-ornith
-
-      - name: Install Laguna app dependencies
-        run: npm ci
-        working-directory: test-laguna-2.1
-
-      - name: Check Laguna source
-        run: npm run lint && npm run typecheck
-        working-directory: test-laguna-2.1
-
-      - name: Install Qwen app dependencies
-        run: npm ci
-        working-directory: test-qwen27b
-
-      - name: Install Qwen 35B app dependencies
-        run: npm ci
-        working-directory: test-Qwen3.6-35B-A3B/expense-tracker
-
-      - name: Install MiMo app dependencies
-        run: npm ci
-        working-directory: test-MiMo-V2.6-Pro
-
-      - name: Check MiMo source
-        run: npm run typecheck
-        working-directory: test-MiMo-V2.6-Pro
-
       - name: Validate benchmark data
         run: node scripts/validate-benchmark-data.mjs
 
       - name: Validate localization
         run: node scripts/validate-localization.mjs
+
+      - name: Install app dependencies
+        run: |
+          set -euo pipefail
+          dirs=(
+            test-astra
+            test-claude
+            test-fable
+            test-gemma4
+            test-gpt
+            test-laguna-2.1
+            test-MiMo-V2.6-Pro
+            test-ornith
+            test-qwen27b
+            test-Qwen3.6-35B-A3B/expense-tracker
+          )
+          printf '%s\n' "${dirs[@]}" | xargs -P 4 -I{} npm ci --prefix {}
+
+      - name: Check Laguna source
+        run: npm run lint && npm run typecheck
+        working-directory: test-laguna-2.1
+
+      - name: Check MiMo source
+        run: npm run typecheck
+        working-directory: test-MiMo-V2.6-Pro
 
       - name: Build Pages bundle
         run: node scripts/build-pages.mjs

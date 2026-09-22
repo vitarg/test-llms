@@ -1,7 +1,7 @@
 import { cp, rm } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { spawnSync } from "node:child_process";
+import { spawn } from "node:child_process";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const outputDir = resolve(root, "pages-dist");
@@ -20,26 +20,43 @@ const projects = [
 ];
 
 function run(command, args, cwd) {
-  const result = spawnSync(command, args, {
-    cwd,
-    stdio: "inherit",
-    shell: process.platform === "win32",
+  return new Promise((resolvePromise, reject) => {
+    const child = spawn(command, args, {
+      cwd,
+      stdio: "inherit",
+      shell: process.platform === "win32",
+    });
+    child.on("error", reject);
+    child.on("exit", (code) => {
+      if (code === 0) {
+        resolvePromise();
+      } else {
+        reject(new Error(`${command} ${args.join(" ")} failed in ${cwd} (exit ${code})`));
+      }
+    });
   });
+}
 
-  if (result.status !== 0) {
-    throw new Error(`${command} ${args.join(" ")} failed in ${cwd}`);
-  }
+async function buildProject(project) {
+  const projectDir = resolve(root, project.dir);
+  await run("npm", ["run", "build"], projectDir);
+  await cp(resolve(projectDir, "dist"), resolve(outputDir, "apps", project.target), {
+    recursive: true,
+  });
+  console.log(`Built ${project.target}`);
 }
 
 await rm(outputDir, { recursive: true, force: true });
 
-for (const project of projects) {
-  const projectDir = resolve(root, project.dir);
-  run("npm", ["run", "build"], projectDir);
+const builds = projects.map((project) => buildProject(project));
+const results = await Promise.allSettled(builds);
+const failures = results.filter((result) => result.status === "rejected");
 
-  await cp(resolve(projectDir, "dist"), resolve(outputDir, "apps", project.target), {
-    recursive: true,
-  });
+if (failures.length > 0) {
+  for (const failure of failures) {
+    console.error(failure.reason);
+  }
+  throw new Error(`${failures.length} of ${projects.length} app builds failed`);
 }
 
 await cp(resolve(root, "site"), outputDir, { recursive: true });

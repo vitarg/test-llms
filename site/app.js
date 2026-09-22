@@ -33,6 +33,9 @@ const elements = {
   openResult: document.querySelector("#open-result"),
   promptText: document.querySelector("#prompt-text"),
   modelPanels: document.querySelectorAll("[data-model-panel]"),
+  i18nText: document.querySelectorAll("[data-i18n]"),
+  i18nAria: document.querySelectorAll("[data-i18n-aria]"),
+  i18nTitle: document.querySelectorAll("[data-i18n-title]"),
 };
 
 function t(key) {
@@ -43,8 +46,15 @@ function resultText(result) {
   return result.translations?.[state.currentLanguage] ?? result;
 }
 
+const numberFormatters = new Map();
+
 function formatNumber(value) {
-  return new Intl.NumberFormat(state.currentLanguage).format(value);
+  let formatter = numberFormatters.get(state.currentLanguage);
+  if (!formatter) {
+    formatter = new Intl.NumberFormat(state.currentLanguage);
+    numberFormatters.set(state.currentLanguage, formatter);
+  }
+  return formatter.format(value);
 }
 
 function getInitialLanguage() {
@@ -64,15 +74,15 @@ function applyStaticTranslations() {
   document.documentElement.lang = state.currentLanguage;
   document.title = t("documentTitle");
 
-  document.querySelectorAll("[data-i18n]").forEach((element) => {
+  elements.i18nText.forEach((element) => {
     element.textContent = t(element.dataset.i18n);
   });
 
-  document.querySelectorAll("[data-i18n-aria]").forEach((element) => {
+  elements.i18nAria.forEach((element) => {
     element.setAttribute("aria-label", t(element.dataset.i18nAria));
   });
 
-  document.querySelectorAll("[data-i18n-title]").forEach((element) => {
+  elements.i18nTitle.forEach((element) => {
     element.setAttribute("title", t(element.dataset.i18nTitle));
   });
 
@@ -113,22 +123,46 @@ function selectedResult() {
 }
 
 function bestOverall() {
-  return [...state.results].sort((a, b) => b.totalScore - a.totalScore)[0];
+  let best;
+  for (const result of state.results) {
+    if (!best || result.totalScore > best.totalScore) {
+      best = result;
+    }
+  }
+  return best;
 }
 
-function bestByType(type) {
-  return [...state.results]
-    .filter((result) => result.modelType === type)
-    .sort((a, b) => b.totalScore - a.totalScore)[0];
-}
+function summaryLeaders() {
+  const leaders = {
+    overall: undefined,
+    local: undefined,
+    frontier: undefined,
+    fastest: undefined,
+  };
 
-function fastestResult() {
-  return [...state.results].sort((a, b) => a.timeSeconds - b.timeSeconds)[0];
+  for (const result of state.results) {
+    if (!leaders.overall || result.totalScore > leaders.overall.totalScore) {
+      leaders.overall = result;
+    }
+    if (!leaders.fastest || result.timeSeconds < leaders.fastest.timeSeconds) {
+      leaders.fastest = result;
+    }
+    const byType = leaders[result.modelType];
+    if (byType === undefined) {
+      continue;
+    }
+    if (!byType || result.totalScore > byType.totalScore) {
+      leaders[result.modelType] = result;
+    }
+  }
+
+  return leaders;
 }
 
 function renderSummary() {
   elements.summaryCards.textContent = "";
 
+  const leaders = summaryLeaders();
   const criticalCount = state.results.reduce(
     (count, result) => count + result.criticalIssues.length,
     0,
@@ -137,23 +171,23 @@ function renderSummary() {
   const cards = [
     {
       label: t("bestOverall"),
-      value: bestOverall()?.label ?? "-",
-      detail: `${bestOverall()?.totalScore ?? 0}/100`,
+      value: leaders.overall?.label ?? "-",
+      detail: `${leaders.overall?.totalScore ?? 0}/100`,
     },
     {
       label: t("bestLocal"),
-      value: bestByType("local")?.label ?? "-",
-      detail: `${bestByType("local")?.totalScore ?? 0}/100`,
+      value: leaders.local?.label ?? "-",
+      detail: `${leaders.local?.totalScore ?? 0}/100`,
     },
     {
       label: t("bestFrontier"),
-      value: bestByType("frontier")?.label ?? "-",
-      detail: `${bestByType("frontier")?.totalScore ?? 0}/100`,
+      value: leaders.frontier?.label ?? "-",
+      detail: `${leaders.frontier?.totalScore ?? 0}/100`,
     },
     {
       label: t("fastest"),
-      value: fastestResult()?.label ?? "-",
-      detail: fastestResult() ? resultText(fastestResult()).totalTime : "-",
+      value: leaders.fastest?.label ?? "-",
+      detail: leaders.fastest ? resultText(leaders.fastest).totalTime : "-",
     },
     {
       label: t("criticalCount"),
@@ -228,7 +262,10 @@ function renderTable() {
     row.dataset.model = result.id;
 
     const model = createElement("td");
-    model.innerHTML = `<strong>${escapeHtml(result.label)}</strong><small>${escapeHtml(result.modelName)}</small>`;
+    model.append(
+      createElement("strong", null, result.label),
+      createElement("small", null, result.modelName),
+    );
 
     const type = createElement("td");
     type.append(createBadge(formatType(result.modelType), result.modelType));
@@ -247,14 +284,6 @@ function renderTable() {
     const note = createElement("td", null, resultText(result).notes);
 
     row.append(model, type, time, build, score, verdict, issues, note);
-
-    row.addEventListener("click", () => setActiveResult(result.id, true));
-    row.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        setActiveResult(result.id, true);
-      }
-    });
 
     elements.resultsTable.append(row);
   });
@@ -301,6 +330,14 @@ function renderCompleteness(result) {
   });
 }
 
+function updateSelection() {
+  elements.resultsTable.querySelectorAll("tr[data-model]").forEach((row) => {
+    const isSelected = row.dataset.model === state.selectedId;
+    row.classList.toggle("is-selected", isSelected);
+    row.setAttribute("aria-pressed", String(isSelected));
+  });
+}
+
 function setActiveResult(modelId, syncUrl = false) {
   const fallback = bestOverall();
   const result = state.results.find((item) => item.id === modelId) ?? fallback;
@@ -329,7 +366,7 @@ function setActiveResult(modelId, syncUrl = false) {
   renderList(elements.criticalList, localized.criticalIssues);
   renderList(elements.evidenceList, localized.evidence);
   renderCompleteness(result);
-  renderTable();
+  updateSelection();
 
   if (syncUrl) {
     const url = new URL(window.location.href);
@@ -367,15 +404,25 @@ function initialModelId() {
   return bestOverall()?.id;
 }
 
-function escapeHtml(value) {
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;");
-}
-
 function setupEvents() {
+  elements.resultsTable.addEventListener("click", (event) => {
+    const row = event.target.closest("tr[data-model]");
+    if (row) {
+      setActiveResult(row.dataset.model, true);
+    }
+  });
+
+  elements.resultsTable.addEventListener("keydown", (event) => {
+    if (event.key !== "Enter" && event.key !== " ") {
+      return;
+    }
+    const row = event.target.closest("tr[data-model]");
+    if (row) {
+      event.preventDefault();
+      setActiveResult(row.dataset.model, true);
+    }
+  });
+
   elements.languageButtons.forEach((button) => {
     button.addEventListener("click", () => {
       state.currentLanguage = button.dataset.lang;
